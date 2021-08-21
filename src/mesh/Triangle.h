@@ -7,7 +7,7 @@
 
 #include <SFML/System/Vector3.hpp>
 #include <tuple>
-#include "Matrix.h"
+#include "../transformation/Matrix.h"
 
 class Triangle {
 public:

@@ -6,10 +6,9 @@
 
 Mesh Mesh::getUnitCube() {
     auto cube = Mesh();
-//    cube.pushTriangle({{0.0,0.0,0.0}, {0.0,1.0,0.0}, {1.0,1.0,0.0}});
+
 cube.setMesh({{{ 0.0f, 0.0f, 0.0f },   {0.0f, 1.0f, 0.0f},    {1.0f, 1.0f, 0.0f} },
               { {0.0f, 0.0f, 0.0f},    {1.0f, 1.0f, 0.0f},    {1.0f, 0.0f, 0.0f} },
-
 
               { {1.0f, 0.0f, 0.0f},   { 1.0f, 1.0f, 0.0f}, {1.0f, 1.0f, 1.0f} },
               { {1.0f, 0.0f, 0.0f},   {1.0f, 1.0f, 1.0f},   {1.0f, 0.0f, 1.0f} },
@@ -33,41 +32,43 @@ cube.setMesh({{{ 0.0f, 0.0f, 0.0f },   {0.0f, 1.0f, 0.0f},    {1.0f, 1.0f, 0.0f}
     return cube;
 }
 
-void Mesh::pushTriangle(triangle tri) {
+void Mesh::pushTriangle(Triangle tri) {
     this->triangles.push_back(tri);
 }
 
-void Mesh::setMesh(std::vector<triangle> tris) {
+void Mesh::setMesh(std::vector<Triangle> tris) {
     this->triangles = std::move(tris);
 }
 
-const std::vector<triangle> &Mesh::getTriangles() const {
+const std::vector<Triangle> &Mesh::getTriangles() const {
     return this->triangles;
 }
 
 
-std::vector<triangle> Mesh::getTrianglesProjected(float theta) {
+std::vector<Triangle> Mesh::getTrianglesProjected(float theta) {
 
-    std::vector<triangle> trianglesProjected;
+    std::vector<Triangle> trianglesProjected;
     auto proj = Matrix::getProjectionMatrix();
     auto rot = Matrix::getRotationMatrixAxisX(theta);
     auto rotZ = Matrix::getRotationMatrixAxisZ(theta);
-    auto trans = Matrix::getTranslationMarix({5.0,5.0,10.0});
+    auto trans = Matrix::getTranslationMarix({0.0,0.0,10.0});
     auto transform = rot * rotZ;
     transform = transform * trans;
     for(auto tri : this->triangles){
-        triangle triProj, triTrans, triRotX, triRotZ;
-        triTrans = this->transformTriangle(tri, transform);
-        triProj = this->transformTriangle(triTrans, proj);
+        Triangle triProj, triTrans, triRotX, triRotZ;
+//
+        triProj = tri.transform(transform).transform(proj);
+//        triProj = tri.transform(proj);
 
+//        triProj.v[0] += sf::Vector3(1,1,0);
+        triProj.v[0] += sf::Vector3(1.0,1.0,0.0);
+        triProj.v[1] += sf::Vector3(1.0,1.0,0.0);
+        triProj.v[2] += sf::Vector3(1.0,1.0,0.0);
 
-
-        std::get<0>(triProj) *= 800.0;
-        std::get<1>(triProj) *= 800.0;
-        std::get<2>(triProj) *= 800.0;
-
-
-
+        triProj.v[0] *= 400.0;
+        triProj.v[1] *= 400.0;
+        triProj.v[2] *= 400.0;
+        std::cout << triProj.v[0].y << std::endl;
         trianglesProjected.push_back(triProj);
 
     }
@@ -77,8 +78,4 @@ std::vector<triangle> Mesh::getTrianglesProjected(float theta) {
 
 
     return trianglesProjected;
-}
-
-triangle Mesh::transformTriangle(triangle tri, Matrix m) {
-    return {m.multiplyByVector(std::get<0>(tri)), m.multiplyByVector(std::get<1>(tri)),m.multiplyByVector(std::get<2>(tri))};
 }

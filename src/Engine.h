@@ -7,14 +7,15 @@
 #include <SFML/Window.hpp>
 #include <vector>
 #include <tuple>
+#include "mesh/Triangle.h"
 
-typedef std::tuple<sf::Vector3<double>,sf::Vector3<double>, sf::Vector3<double>> triangle;
+
 
 class Engine {
 
 private:
     sf::Window* window;
-    std::vector<triangle> triangles;
+    std::vector<Triangle> triangles;
     sf::VideoMode windowSize;
 
 public:
@@ -22,10 +23,9 @@ public:
     void mapEvents();
     bool isRunning();
     void render();
-    void pushTriangle(triangle tri);
-    void pushTriangle(sf::Vector3<double> f, sf::Vector3<double> s, sf::Vector3<double> t);
-    void pushTriangle(sf::Vector3<double> vertices[3]);
-    void convertTriangles();
+    void pushTriangle(Triangle tri);
+
+    void fixTriangles();
     void drawTriangles();
     void emptyTriangles();
     void run();
