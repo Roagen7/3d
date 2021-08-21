@@ -59,7 +59,8 @@ void Engine::run() {
 void Engine::drawTriangles() {
     for(Triangle tri : triangles){
         glBegin(GL_TRIANGLES);
-        glColor3f(1, 1, 1);
+        glColor3f(tri.lum, tri.lum, tri.lum);
+
         glVertex3f(tri.v[0].x, tri.v[0].y, tri.v[0].z);
         glVertex3f(tri.v[1].x, tri.v[1].y, tri.v[1].z);
         glVertex3f(tri.v[2].x, tri.v[2].y, tri.v[2].z);
@@ -88,8 +89,12 @@ void Engine::fixTriangles() {
     }
 }
 
-void Engine::drawSceneFrame(Scene scene,Matrix transformMatrix, Matrix projectionMatrix) {
-
+void Engine::drawSceneFrame(Scene scene,Matrix globalTransformMatrix, Matrix projectionMatrix) {
+    scene.buildFrame(globalTransformMatrix, projectionMatrix);
+    for(auto tri : scene.getBuiltTris()){
+        this->pushTriangle(tri);
+    }
+    scene.cleanup();
 }
 
 

@@ -3,7 +3,9 @@
 //
 
 #include <SFML/Window/VideoMode.hpp>
+#include <iostream>
 #include "Triangle.h"
+#include "../transformation/VectorUtils.h"
 
 
 Triangle::Triangle(sf::Vector3<double> f, sf::Vector3<double> s, sf::Vector3<double> t) {
@@ -22,6 +24,7 @@ Triangle::Triangle() {
 Triangle Triangle::fixed(sf::VideoMode windowSize) {
 
     Triangle tri;
+    tri.lum = this->lum;
     tri.v[0].x = -1.0 + 2.0 *   this->v[0].x / windowSize.width;
     tri.v[0].y = 1.0 - 2.0 *  this->v[0].y / windowSize.width;
     tri.v[0].z = 1.0 - 2.0 *  this->v[0].z / windowSize.width;
@@ -37,5 +40,13 @@ Triangle Triangle::fixed(sf::VideoMode windowSize) {
 
 Triangle Triangle::transform(Matrix m) {
     return {m.multiplyByVector(this->v[0]), m.multiplyByVector(this->v[1]),m.multiplyByVector(this->v[2])};
+}
+
+sf::Vector3<double> Triangle::normal() {
+
+    auto line1 = this->v[1] - this->v[0];
+    auto line2 = this->v[2] - this->v[0];
+    auto normal = VectorUtils::normalize(VectorUtils::cross(line1, line2));
+    return normal;
 }
 

@@ -10,6 +10,7 @@
 #include <tuple>
 
 #include "../transformation/Matrix.h"
+#include "../transformation/VectorUtils.h"
 #include "Triangle.h"
 #include <utility>
 #include <iostream>
@@ -18,8 +19,6 @@
 class Mesh {
 private:
     std::vector<Triangle> triangles;
-
-
 
 public:
 

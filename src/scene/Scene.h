@@ -7,6 +7,7 @@
 
 
 #include "../mesh/Mesh.h"
+#include "../transformation/VectorUtils.h"
 
 class Scene {
 private:
@@ -15,11 +16,14 @@ private:
     std::vector<Triangle> trisProjected;
 
 public:
-    void pushMesh(Mesh m);
+    void pushMesh(const Mesh& m);
     void transform(Matrix matrix);
+    void painterSort();
+    void applyLight();
     void project(Matrix matrix);
     void cleanup();
     void buildFrame(Matrix globalTransformMatrix, Matrix projectionMatrix);
+    std::vector<Triangle> getBuiltTris();
 
 };
 
