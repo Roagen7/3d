@@ -8,7 +8,7 @@
 #include <vector>
 #include <tuple>
 #include "mesh/Triangle.h"
-
+#include "scene/Scene.h"
 
 
 class Engine {
@@ -28,6 +28,8 @@ public:
     void fixTriangles();
     void drawTriangles();
     void emptyTriangles();
+    void drawSceneFrame(Scene scene, Matrix transformMatrix, Matrix projectionMatrix);
+
     void run();
 
 };

@@ -88,6 +88,10 @@ void Engine::fixTriangles() {
     }
 }
 
+void Engine::drawSceneFrame(Scene scene,Matrix transformMatrix, Matrix projectionMatrix) {
+
+}
+
 
 
 

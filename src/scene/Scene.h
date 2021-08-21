@@ -6,7 +6,20 @@
 #define UNTITLED3_SCENE_H
 
 
+#include "../mesh/Mesh.h"
+
 class Scene {
+private:
+    std::vector<Mesh> meshes;
+    std::vector<Triangle> trisTransformed;
+    std::vector<Triangle> trisProjected;
+
+public:
+    void pushMesh(Mesh m);
+    void transform(Matrix matrix);
+    void project(Matrix matrix);
+    void cleanup();
+    void buildFrame(Matrix globalTransformMatrix, Matrix projectionMatrix);
 
 };
 

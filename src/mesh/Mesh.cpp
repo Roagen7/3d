@@ -56,11 +56,10 @@ std::vector<Triangle> Mesh::getTrianglesProjected(float theta) {
     transform = transform * trans;
     for(auto tri : this->triangles){
         Triangle triProj, triTrans, triRotX, triRotZ;
-//
-        triProj = tri.transform(transform).transform(proj);
-//        triProj = tri.transform(proj);
 
-//        triProj.v[0] += sf::Vector3(1,1,0);
+
+
+        triProj = tri.transform(transform).transform(proj);
         triProj.v[0] += sf::Vector3(1.0,1.0,0.0);
         triProj.v[1] += sf::Vector3(1.0,1.0,0.0);
         triProj.v[2] += sf::Vector3(1.0,1.0,0.0);
