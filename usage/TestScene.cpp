@@ -19,19 +19,19 @@ void TestScene::updateProperties(std::vector<sf::Keyboard::Key> keysPressed) {
     for(auto key : keysPressed){
         if(key == sf::Keyboard::A){
             this->theta += 0.01;
-            this->camera.pos += {1,0,0};
+            this->camera.pos += Matrix::getRotationMatrixAxisY(1.63).multiplyByVector(this->camera.lookDir());
         }
         if(key == sf::Keyboard::D){
-            this->camera.pos += {-1,0,0};
+            this->camera.pos -= Matrix::getRotationMatrixAxisY(1.63).multiplyByVector(this->camera.lookDir());
             this->theta -= 0.01;
         }
         if(key == sf::Keyboard::W){
-//            this->camera.pos += this->camera.lookDir() * 8.0;
-            this->camera.pos += {0,0,1};
+            this->camera.pos += this->camera.lookDir();
+//            this->camera.pos += {0,0,1};
         }
         if(key == sf::Keyboard::S){
-//            this->camera.pos -= this->camera.lookDir() * 8.0;
-            this->camera.pos -= {0,0,1};
+            this->camera.pos -= this->camera.lookDir();
+//            this->camera.pos -= {0,0,1};
         }
         if(key == sf::Keyboard::Right){
             this->camera.yaw += 0.1;
