@@ -8,6 +8,7 @@
 
 #include "../mesh/Mesh.h"
 #include "../transformation/VectorUtils.h"
+#include "../spatial/light/Light.h"
 
 class Scene {
 private:
@@ -18,6 +19,7 @@ private:
 protected:
     //children
     std::vector<Mesh> meshes;
+    std::vector<Light> lights;
 public:
     void pushMesh(const Mesh& m);
 
