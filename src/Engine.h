@@ -22,6 +22,7 @@ public:
     Engine();
     void mapEvents();
     bool isRunning();
+    sf::Vector2u getWindowSize();
     void render();
     void pushTriangle(Triangle tri);
 

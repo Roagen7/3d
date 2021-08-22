@@ -97,6 +97,13 @@ void Engine::drawSceneFrame(Scene scene,Matrix globalTransformMatrix, Matrix pro
     scene.cleanup();
 }
 
+sf::Vector2u Engine::getWindowSize() {
+    return this->window->getSize();
+}
+
+
+
+
 
 
 

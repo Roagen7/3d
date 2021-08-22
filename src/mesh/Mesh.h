@@ -13,7 +13,9 @@
 #include "../transformation/VectorUtils.h"
 #include "Triangle.h"
 #include <utility>
+#include <fstream>
 #include <iostream>
+#include <strstream>
 
 
 class Mesh {
@@ -25,6 +27,8 @@ public:
     void pushTriangle(Triangle tri);
     void setMesh(std::vector<Triangle> tris);
     static Mesh getUnitCube();
+    static Mesh loadFromObj(std::string filename);
+
     [[nodiscard]] const std::vector<Triangle> &getTriangles() const;
     std::vector<Triangle> getTrianglesProjected(float theta);
 

@@ -4,13 +4,13 @@
 
 #include "Matrix.h"
 
-Matrix Matrix::getProjectionMatrix() {
+Matrix Matrix::getProjectionMatrix(sf::Vector2u screenSize) {
 
     auto matrix = Matrix();
     float fNear = 0.1f;
     float fFar = 1000.0f;
     float fFov = 90.0f;
-    float fAspectRatio = (float)800 / (float)800;
+    float fAspectRatio = (float)screenSize.y / (float)screenSize.x;
     float fFovRad = 1.0f / std::tan(fFov * 0.5f / 180.0f * 3.14159f);
 
     matrix.m[0][0] = fAspectRatio * fFovRad;
