@@ -15,7 +15,8 @@ public:
     static Matrix getRotationMatrixAxisX(double rad);
     static Matrix getRotationMatrixAxisZ(double rad);
     static Matrix getTranslationMarix(sf::Vector3<double> translation);
-
+    static Matrix getScaleMatrix(sf::Vector3<double> scale);
+    static Matrix getIdentityMatrix();
     friend Matrix operator*(Matrix m1, Matrix m2);
 
 

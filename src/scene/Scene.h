@@ -11,20 +11,28 @@
 
 class Scene {
 private:
-    std::vector<Mesh> meshes;
-    std::vector<Triangle> trisTransformed;
-    std::vector<Triangle> trisProjected;
 
+    std::vector<Triangle> trisLocallyTransformed;
+    std::vector<Triangle> trisGloballyTransformed;
+    std::vector<Triangle> trisProjected;
+protected:
+    //children
+    std::vector<Mesh> meshes;
 public:
     void pushMesh(const Mesh& m);
-    void transform(Matrix matrix);
+
+
+    void localTransform();
+    void globalTransform(Matrix matrix);
     void painterSort();
     void applyLight();
     void project(Matrix matrix);
     void cleanup();
+
     void buildFrame(Matrix globalTransformMatrix, Matrix projectionMatrix);
     std::vector<Triangle> getBuiltTris();
-
+    //run this every frame to update scene children properties
+    virtual void updateProperties();
 };
 
 

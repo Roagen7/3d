@@ -5,19 +5,20 @@
 #include "Scene.h"
 
 void Scene::buildFrame(Matrix globalTransformMatrix, Matrix projectionMatrix) {
-    this->transform(globalTransformMatrix);
+
+    this->updateProperties();
+    this->localTransform();
+    this->globalTransform(globalTransformMatrix);
     this->applyLight();
     this->project(projectionMatrix);
     this->painterSort();
-
-
 
 }
 
 void Scene::project(Matrix matrix) {
 
 
-    for(auto tri : this->trisTransformed){
+    for(auto tri : this->trisGloballyTransformed){
 
 //        if(VectorUtils::dot(tri.normal(), ray) < 0.f){
             Triangle triProj = tri.transform(matrix);
@@ -34,30 +35,38 @@ void Scene::project(Matrix matrix) {
 
 
     }
-
-
 }
 
-void Scene::transform(Matrix matrix) {
-    sf::Vector3<double> camera = {0,0,0};
+
+void Scene::localTransform() {
     for(const auto& m : this->meshes){
         for(auto tri : m.getTriangles()){
+            tri = tri.transform(m.localTransform);
+            this->trisLocallyTransformed.push_back(tri);
+        }
+    }
+}
+
+void Scene::globalTransform(Matrix matrix) {
+    sf::Vector3<double> camera = {0,0,0};
+
+        for(auto tri : this->trisLocallyTransformed){
             tri = tri.transform(matrix);
             auto ray = tri.v[1] - camera;
 //
-//            if(VectorUtils::dot(tri.normal(), ray) >= 0.0){
-//                continue;
-//            }
+            if(VectorUtils::dot(tri.normal(), ray) >= 0.0){
+                continue;
+            }
 
-            this->trisTransformed.push_back(tri);
+            this->trisGloballyTransformed.push_back(tri);
         }
-    }
+
 }
 
 void Scene::cleanup() {
 
     this->trisProjected.clear();
-    this->trisTransformed.clear();
+    this->trisGloballyTransformed.clear();
 }
 
 void Scene::pushMesh(const Mesh& m) {
@@ -73,7 +82,7 @@ void Scene::applyLight() {
     sf::Vector3<double> lightDir(0.0, 1.0, -1.0);
     lightDir = VectorUtils::normalize(lightDir);
 
-    for(auto& tri : this->trisTransformed){
+    for(auto& tri : this->trisGloballyTransformed){
         auto normal = tri.normal();
         auto lum = VectorUtils::dot(normal, lightDir);
         tri.lum = std::max(0.1,lum);
@@ -87,4 +96,8 @@ void Scene::painterSort() {
         float z2 = (t2.v[0].z + t2.v[1].z + t2.v[2].z) / 3.0f;
         return z1 > z2;
     });
+}
+
+void Scene::updateProperties() {
+
 }

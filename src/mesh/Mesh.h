@@ -24,6 +24,7 @@ private:
 
 public:
 
+    Matrix localTransform = Matrix::getIdentityMatrix();
     void pushTriangle(Triangle tri);
     void setMesh(std::vector<Triangle> tris);
     static Mesh getUnitCube();

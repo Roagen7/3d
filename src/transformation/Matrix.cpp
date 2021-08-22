@@ -81,3 +81,22 @@ Matrix Matrix::getTranslationMarix(sf::Vector3<double> translation) {
     matrix.m[3][2] = translation.z;
     return matrix;
 }
+
+Matrix Matrix::getIdentityMatrix() {
+    Matrix matrix;
+    matrix.m[0][0] = 1.0f;
+    matrix.m[1][1] = 1.0f;
+    matrix.m[2][2] = 1.0f;
+    matrix.m[3][3] = 1.0f;
+    return matrix;
+}
+
+Matrix Matrix::getScaleMatrix(sf::Vector3<double> scale) {
+    Matrix matrix;
+    matrix.m[0][0] = scale.x;
+    matrix.m[1][1] = scale.y;
+    matrix.m[2][2] = scale.z;
+    matrix.m[3][3]  = 1.0;
+
+    return matrix;
+}

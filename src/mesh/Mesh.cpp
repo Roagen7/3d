@@ -52,13 +52,13 @@ std::vector<Triangle> Mesh::getTrianglesProjected(float theta) {
 //    auto rot = Matrix::getRotationMatrixAxisX(theta);
 //    auto rotZ = Matrix::getRotationMatrixAxisZ(theta);
 //    auto trans = Matrix::getTranslationMarix({0.0,0.0,10.0});
-//    auto transform = rot * rotZ;
-//    transform = transform * trans;
+//    auto globalTransform = rot * rotZ;
+//    transform = globalTransform * trans;
 //    sf::Vector3<double> camera = {0.0,0.0,-1.0};
 ////    vector<triangle> vecTrianglesToRaster;
 //    for(auto tri : this->triangles){
 //        Triangle triProj, triTrans, triRotX, triRotZ;
-//        triTrans = tri.transform(transform);
+//        triTrans = tri.transform(globalTransform);
 //
 //        auto ray = triTrans.v[0] - camera;
 //
@@ -77,7 +77,7 @@ std::vector<Triangle> Mesh::getTrianglesProjected(float theta) {
 //        normal = triTrans.normal();
 //
 //        if(VectorUtils::dot(normal,ray) < 0.0){
-//            triProj = triTrans.transform(proj);
+//            triProj = triTrans.globalTransform(proj);
 //            triProj.v[0] += sf::Vector3(1.0,1.0,0.0);
 //            triProj.v[1] += sf::Vector3(1.0,1.0,0.0);
 //            triProj.v[2] += sf::Vector3(1.0,1.0,0.0);
