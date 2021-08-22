@@ -9,15 +9,16 @@
 #include "../mesh/Mesh.h"
 #include "../transformation/VectorUtils.h"
 #include "../spatial/light/Light.h"
+#include "../spatial/camera/Camera.h"
 
 class Scene {
 private:
-
     std::vector<Triangle> trisLocallyTransformed;
     std::vector<Triangle> trisGloballyTransformed;
     std::vector<Triangle> trisProjected;
 protected:
     //children
+    Camera camera;
     std::vector<Mesh> meshes;
     std::vector<Light> lights;
 public:

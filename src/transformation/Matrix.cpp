@@ -112,9 +112,13 @@ Matrix Matrix::getScaleMatrix(sf::Vector3<double> scale) {
     return matrix;
 }
 
-Matrix Matrix::getViewMatrix(sf::Vector3<double> cameraPos, sf::Vector3<double> target, sf::Vector3<double> up, double yaw) {
+Matrix Matrix::getViewMatrix(sf::Vector3<double> cameraPos, sf::Vector3<double> target, sf::Vector3<double> up, sf::Vector3<double> rotation) {
     Matrix matrix;
-    auto cameraRot = Matrix::getRotationMatrixAxisY(yaw);
+
+
+    auto cameraRot = Matrix::getRotationMatrixAxisX(rotation.x)
+                    *Matrix::getRotationMatrixAxisY(rotation.y)
+                    *Matrix::getRotationMatrixAxisZ(rotation.z);
     auto lookDir = cameraRot.multiplyByVector(target);
     target =  cameraPos + lookDir;
     auto cameraView = Matrix::getPointAt(cameraPos,target, up);

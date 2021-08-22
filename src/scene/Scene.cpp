@@ -18,11 +18,16 @@ void Scene::buildFrame(Matrix globalTransformMatrix, Matrix projectionMatrix) {
 
 void Scene::project(Matrix matrix) {
 
+    auto view = Matrix::getViewMatrix(
+            this->camera.pos,
+            {0,0,1},
+            {0,1,0},
+            {this->camera.pitch,this->camera.yaw, this->camera.roll});
 
     for(auto tri : this->trisGloballyTransformed){
 
 //        if(VectorUtils::dot(tri.normal(), ray) < 0.f){
-            Triangle triProj = tri.transform(matrix);
+            Triangle triProj = tri.transform(view).transform(matrix);
             triProj.lum = tri.lum;
             triProj.v[0] += sf::Vector3(1.0,1.0,0.0);
             triProj.v[1] += sf::Vector3(1.0,1.0,0.0);
@@ -49,11 +54,11 @@ void Scene::localTransform() {
 }
 
 void Scene::globalTransform(Matrix matrix) {
-    sf::Vector3<double> camera = {0,0,0};
+
 
         for(auto tri : this->trisLocallyTransformed){
             tri = tri.transform(matrix);
-            auto ray = tri.v[1] - camera;
+            auto ray = tri.v[1] - this->camera.pos;
 //
             if(VectorUtils::dot(tri.normal(), ray) >= 0.0){
                 continue;
