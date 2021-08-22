@@ -35,9 +35,15 @@ void TestScene::updateProperties(std::vector<sf::Keyboard::Key> keysPressed) {
         }
         if(key == sf::Keyboard::Right){
             this->camera.yaw += 0.1;
+            if(this->camera.yaw > 3.14) {
+                this->camera.yaw = 0;
+            }
         }
         if(key == sf::Keyboard::Left){
             this->camera.yaw -= 0.1;
+            if(this->camera.yaw < -3.14) {
+                this->camera.yaw = 0;
+            }
         }
 //        if(key == sf::Keyboard::Up){
 //            this->camera.pitch += 0.2;
@@ -47,8 +53,8 @@ void TestScene::updateProperties(std::vector<sf::Keyboard::Key> keysPressed) {
 //        }
     }
     this->theta += 0.01;
-    this->meshes[0].localTransform = Matrix::getRotationMatrixAxisX(this->theta) * Matrix::getRotationMatrixAxisZ(this->theta) * Matrix::getTranslationMarix({0,0,1});
-    this->meshes[1].localTransform = Matrix::getRotationMatrixAxisX(this->theta * 3)*Matrix::getTranslationMarix({3,0,0});
+//    this->meshes[0].localTransform = Matrix::getRotationMatrixAxisX(this->theta) * Matrix::getRotationMatrixAxisZ(this->theta) * Matrix::getTranslationMarix({0,0,1});
+//    this->meshes[1].localTransform = Matrix::getRotationMatrixAxisX(this->theta * 3)*Matrix::getTranslationMarix({3,0,0});
 }
 
 

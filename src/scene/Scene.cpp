@@ -23,7 +23,8 @@ void Scene::project(Matrix matrix) {
             {0,0,1},
             {0,1,0},
             {this->camera.pitch,this->camera.yaw, this->camera.roll});
-
+//    {0,0.8,0});
+    std::cout << this->camera.yaw << std::endl;
     for(auto tri : this->trisGloballyTransformed){
 
 //        if(VectorUtils::dot(tri.normal(), ray) < 0.f){

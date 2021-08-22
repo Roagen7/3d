@@ -15,6 +15,7 @@ int main() {
 
         auto proj = Matrix::getProjectionMatrix(engine->getWindowSize());
         auto globTransf =   Matrix::getRotationMatrixAxisX(theta) * Matrix::getRotationMatrixAxisZ(theta) * Matrix::getTranslationMarix({0.0,0.0,15.0});
+        globTransf = Matrix::getIdentityMatrix();
         theta += 0.01;
         engine->drawSceneFrame(scene, globTransf, proj);
         scene.updateProperties(engine->keysPressed);

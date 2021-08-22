@@ -141,18 +141,19 @@ Matrix Matrix::getPointAt(sf::Vector3<double> camera, sf::Vector3<double> target
     matrix.m[0][0] = newRight.x;	matrix.m[0][1] = newRight.y;	matrix.m[0][2] = newRight.z;	matrix.m[0][3] = 0.0f;
     matrix.m[1][0] = newUp.x;		matrix.m[1][1] = newUp.y;		matrix.m[1][2] = newUp.z;		matrix.m[1][3] = 0.0f;
     matrix.m[2][0] = newForward.x;	matrix.m[2][1] = newForward.y;	matrix.m[2][2] = newForward.z;	matrix.m[2][3] = 0.0f;
-    matrix.m[3][0] = camera.x;			matrix.m[3][1] = camera.y;			matrix.m[3][2] = camera.z;			matrix.m[3][3] = 1.0f;
+    matrix.m[3][0] = camera.x;		matrix.m[3][1] = camera.y;		matrix.m[3][2] = camera.z;		matrix.m[3][3] = 1.0f;
 
     return matrix;
 }
 
 Matrix Matrix::getInverse() {
     Matrix matrix;
-    matrix.m[0][0] = this->m[0][0]; matrix.m[0][1] = this->m[1][0]; this->m[0][2] = this->m[2][0]; this->m[0][3] = 0.0f;
+    matrix.m[0][0] = this->m[0][0]; matrix.m[0][1] = this->m[1][0]; matrix.m[0][2] = this->m[2][0]; matrix.m[0][3] = 0.0f;
     matrix.m[1][0] = this->m[0][1]; matrix.m[1][1] = this->m[1][1]; matrix.m[1][2] = this->m[2][1]; matrix.m[1][3] = 0.0f;
     matrix.m[2][0] = this->m[0][2]; matrix.m[2][1] = this->m[1][2]; matrix.m[2][2] = this->m[2][2]; matrix.m[2][3] = 0.0f;
     matrix.m[3][0] = -(this->m[3][0] * matrix.m[0][0] + this->m[3][1] * matrix.m[1][0] + this->m[3][2] * matrix.m[2][0]);
     matrix.m[3][1] = -(this->m[3][0] * matrix.m[0][1] + this->m[3][1] * matrix.m[1][1] + this->m[3][2] * matrix.m[2][1]);
     matrix.m[3][2] = -(this->m[3][0] * matrix.m[0][2] + this->m[3][1] * matrix.m[1][2] + this->m[3][2] * matrix.m[2][2]);
+    matrix.m[3][3] = 1.0;
     return matrix;
 }
