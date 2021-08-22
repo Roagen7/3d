@@ -19,6 +19,7 @@ private:
     sf::VideoMode windowSize;
 
 public:
+    std::vector<sf::Keyboard::Key> keysPressed;
     Engine();
     void mapEvents();
     bool isRunning();

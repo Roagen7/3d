@@ -14,10 +14,10 @@ int main() {
     while (engine->isRunning()) {
 
         auto proj = Matrix::getProjectionMatrix(engine->getWindowSize());
-        auto globTransf = Matrix::getRotationMatrixAxisX(theta) * Matrix::getTranslationMarix({0.0,0.0,15.0});
+        auto globTransf = Matrix::getTranslationMarix({0.0,0.0,15.0});
         theta += 0.01;
         engine->drawSceneFrame(scene, globTransf, proj);
-        scene.updateProperties();
+        scene.updateProperties(engine->keysPressed);
         engine->run();
     }
 

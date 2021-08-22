@@ -12,7 +12,7 @@ class TestScene : public Scene {
 public:
     float theta = 0;
     explicit TestScene();
-    void updateProperties() override;
+    void updateProperties(std::vector<sf::Keyboard::Key> keysPressed) override;
 
 };
 

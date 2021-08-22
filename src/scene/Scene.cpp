@@ -6,7 +6,7 @@
 
 void Scene::buildFrame(Matrix globalTransformMatrix, Matrix projectionMatrix) {
 
-    this->updateProperties();
+//    this->updateProperties();
     this->localTransform();
     this->globalTransform(globalTransformMatrix);
     this->applyLight();
@@ -98,6 +98,6 @@ void Scene::painterSort() {
     });
 }
 
-void Scene::updateProperties() {
+void Scene::updateProperties(std::vector<sf::Keyboard::Key> keysPressed) {
 
 }

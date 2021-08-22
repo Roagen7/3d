@@ -23,11 +23,14 @@ Engine::Engine() {
 
 void Engine::mapEvents() {
     sf::Event event{};
+    keysPressed.clear();
     while(window->pollEvent(event)){
         if(event.type == sf::Event::Closed){
             window->close();
         } else if(event.type == sf::Event::Resized){
             glViewport(0,0,(int) event.size.width, (int) event.size.height);
+        } else if(event.type == sf::Event::KeyPressed){
+            keysPressed.push_back(event.key.code);
         }
     }
 }
