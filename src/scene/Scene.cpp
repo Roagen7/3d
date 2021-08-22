@@ -10,6 +10,7 @@ void Scene::buildFrame(Matrix globalTransformMatrix, Matrix projectionMatrix) {
     this->localTransform();
     this->globalTransform(globalTransformMatrix);
     this->applyLight();
+    //    this->viewSpace();
     this->project(projectionMatrix);
     this->painterSort();
 
@@ -66,6 +67,7 @@ void Scene::globalTransform(Matrix matrix) {
 void Scene::cleanup() {
 
     this->trisProjected.clear();
+    this->trisLocallyTransformed.clear();
     this->trisGloballyTransformed.clear();
 }
 

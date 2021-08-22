@@ -9,7 +9,7 @@ TestScene::TestScene() {
     auto ob = Mesh::loadFromObj("../assets/mesh/WC.obj");
 
     this->pushMesh(ob);
-    this->pushMesh(Mesh::getUnitCube());
+//    this->pushMesh(Mesh::getUnitCube());
 }
 
 void TestScene::updateProperties(std::vector<sf::Keyboard::Key> keysPressed) {
@@ -24,10 +24,8 @@ void TestScene::updateProperties(std::vector<sf::Keyboard::Key> keysPressed) {
         }
     }
 
-
-
-    this->meshes[0].localTransform = Matrix::getRotationMatrixAxisX(this->theta) * Matrix::getRotationMatrixAxisZ(this->theta) * Matrix::getTranslationMarix({0,0,1});
-    this->meshes[1].localTransform = Matrix::getRotationMatrixAxisX(this->theta * 3)*Matrix::getTranslationMarix({3,0,0});
+//    this->meshes[0].localTransform = Matrix::getRotationMatrixAxisX(this->theta) * Matrix::getRotationMatrixAxisZ(this->theta) * Matrix::getTranslationMarix({0,0,1});
+//    this->meshes[1].localTransform = Matrix::getRotationMatrixAxisX(this->theta * 3)*Matrix::getTranslationMarix({3,0,0});
 }
 
 
