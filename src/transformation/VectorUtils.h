@@ -15,6 +15,7 @@ public:
     static double dot(sf::Vector3<double> v1, sf::Vector3<double> v2);
     static sf::Vector3<double> cross(sf::Vector3<double> v1, sf::Vector3<double> v2);
     static sf::Vector3<double> normalize(sf::Vector3<double> v);
+    static sf::Vector3<double> intersectPlane(sf::Vector3<double> planeP, sf::Vector3<double> planeN, sf::Vector3<double> lineStart, sf::Vector3<double> lineEnd);
 };
 
 

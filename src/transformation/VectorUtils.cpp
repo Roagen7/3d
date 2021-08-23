@@ -25,6 +25,19 @@ sf::Vector3<double> VectorUtils::normalize(sf::Vector3<double> v){
     return v / std::sqrt(dot(v,v));
 }
 
+sf::Vector3<double>
+VectorUtils::intersectPlane(sf::Vector3<double> planeP, sf::Vector3<double> planeN, sf::Vector3<double> lineStart,
+                            sf::Vector3<double> lineEnd) {
+    planeN = VectorUtils::normalize(planeN);
+    float planeD = -VectorUtils::dot(planeN,planeP);
+    float ad = VectorUtils::dot(lineStart,planeN);
+    float bd = VectorUtils::dot(lineEnd, planeN);
+    float t = (-planeD - ad) / (bd - ad);
+    sf::Vector3<double> lineStartToEnd = lineEnd - lineStart;
+    sf::Vector3<double> lineToIntersect = lineStartToEnd * (double) t;
+    return lineStart + lineToIntersect;
+}
+
 
 //std::string VectorUtils::exec(const char* cmd) {
 //    std::array<char, 128> buffer;
