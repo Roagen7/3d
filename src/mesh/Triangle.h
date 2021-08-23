@@ -12,7 +12,7 @@
 class Triangle {
 public:
     sf::Vector3<double> v[3]; // vertex coordinates
-    sf::Vector2<double> q[3]; //texture coordinates
+    sf::Vector3<double> q[3]; //texture coordinates
     double lum = 0;
     Triangle(sf::Vector3<double> f, sf::Vector3<double> s, sf::Vector3<double> t);
     Triangle(sf::Vector3<double> f, sf::Vector3<double> s, sf::Vector3<double> t, sf::Vector2<double> t1, sf::Vector2<double> t2, sf::Vector2<double> t3);

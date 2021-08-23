@@ -27,12 +27,12 @@ sf::Vector3<double> VectorUtils::normalize(sf::Vector3<double> v){
 
 sf::Vector3<double>
 VectorUtils::intersectPlane(sf::Vector3<double> planeP, sf::Vector3<double> planeN, sf::Vector3<double> lineStart,
-                            sf::Vector3<double> lineEnd) {
+                            sf::Vector3<double> lineEnd, float &t) {
     planeN = VectorUtils::normalize(planeN);
     float planeD = -VectorUtils::dot(planeN,planeP);
     float ad = VectorUtils::dot(lineStart,planeN);
     float bd = VectorUtils::dot(lineEnd, planeN);
-    float t = (-planeD - ad) / (bd - ad);
+    t = (-planeD - ad) / (bd - ad);
     sf::Vector3<double> lineStartToEnd = lineEnd - lineStart;
     sf::Vector3<double> lineToIntersect = lineStartToEnd * (double) t;
     return lineStart + lineToIntersect;

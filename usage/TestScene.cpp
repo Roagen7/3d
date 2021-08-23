@@ -10,7 +10,7 @@ TestScene::TestScene() {
     auto ob2 = Mesh::loadFromObj("../assets/mesh/mountains.obj");
 //    this->pushMesh(ob);
 
-    this->pushMesh(Mesh::getUnitCube());
+    this->pushMesh(Mesh::getUnitCubeTextured());
 //    this->pushMesh(ob2);
 }
 
