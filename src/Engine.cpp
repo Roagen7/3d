@@ -17,8 +17,9 @@ Engine::Engine() {
     this->window = new sf::Window(this->windowSize, "OpenGL", sf::Style::Default, settings);
     window->setVerticalSyncEnabled(true);
     window->setActive(true);
-
-
+    this->mousePrevPosRelative =sf::Vector2<double>(sf::Mouse::getPosition(*window));
+    this->mousePosRelative = sf::Vector2<double>(sf::Mouse::getPosition(*window));
+    this->window->setMouseCursorVisible(false);
 }
 
 void Engine::mapEvents() {
@@ -54,6 +55,8 @@ bool Engine::isRunning() {
 }
 
 void Engine::run() {
+    this->updateMousePos();
+    this->lockMouse();
     this->mapEvents();
     this->render();
 
@@ -70,8 +73,6 @@ void Engine::drawTriangles() {
 
         glEnd();
     }
-
-
 }
 
 
@@ -102,6 +103,21 @@ void Engine::drawSceneFrame(Scene scene,Matrix globalTransformMatrix, Matrix pro
 
 sf::Vector2u Engine::getWindowSize() {
     return this->window->getSize();
+}
+
+sf::Vector2<double> Engine::getMouseDelta() {
+    return this->mousePosRelative - this->mousePrevPosRelative;
+}
+
+void Engine::updateMousePos() {
+    this->mousePrevPosRelative.x = this->getWindowSize().x/2;
+    this->mousePrevPosRelative.y = this->getWindowSize().y/2;
+    this->mousePosRelative = sf::Vector2<double>(sf::Mouse::getPosition(*this->window));
+//    std::cout << this->mousePosRelative.x << " " << this->mousePosRelative.y << std::endl;
+}
+
+void Engine::lockMouse() {
+    sf::Mouse::setPosition({(int) this->getWindowSize().x / 2, (int) this->getWindowSize().y / 2}, *window);
 }
 
 

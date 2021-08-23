@@ -17,15 +17,22 @@ private:
     sf::Window* window;
     std::vector<Triangle> triangles;
     sf::VideoMode windowSize;
+    sf::Vector2<double> mousePrevPosRelative;
 
 public:
+    sf::Vector2<double> mousePosRelative;
     std::vector<sf::Keyboard::Key> keysPressed;
+
     Engine();
     void mapEvents();
+    void updateMousePos();
     bool isRunning();
     sf::Vector2u getWindowSize();
+    sf::Vector2<double> getMouseDelta();
+
     void render();
     void pushTriangle(Triangle tri);
+    void lockMouse();
 
     void fixTriangles();
     void drawTriangles();

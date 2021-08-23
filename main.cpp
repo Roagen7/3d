@@ -18,7 +18,7 @@ int main() {
         globTransf = Matrix::getIdentityMatrix();
         theta += 0.01;
         engine->drawSceneFrame(scene, globTransf, proj);
-        scene.updateProperties(engine->keysPressed);
+        scene.updateProperties(engine->keysPressed, engine->getMouseDelta());
         engine->run();
     }
 
