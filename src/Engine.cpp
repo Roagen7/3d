@@ -63,13 +63,38 @@ void Engine::run() {
 }
 
 void Engine::drawTriangles() {
+
+
     for(Triangle tri : triangles){
+//        sf::Texture tex;
+
+        if(this->drawMaterials){
+            glEnable(GL_TEXTURE_2D);
+            sf::Texture::bind(&this->material.texture);
+        }
+
+
+
         glBegin(GL_TRIANGLES);
         glColor3f(tri.lum, tri.lum, tri.lum);
 
-        glVertex3f(tri.v[0].x, tri.v[0].y, tri.v[0].z);
-        glVertex3f(tri.v[1].x, tri.v[1].y, tri.v[1].z);
-        glVertex3f(tri.v[2].x, tri.v[2].y, tri.v[2].z);
+        if(this->drawMaterials){
+            glTexCoord2f(tri.q[0].x/tri.q[0].z, tri.q[0].y/tri.q[0].z);
+            glVertex3f(tri.v[0].x, tri.v[0].y, tri.v[0].z);
+            glTexCoord2f(tri.q[1].x/tri.q[1].z, tri.q[1].y/tri.q[1].z);
+            glVertex3f(tri.v[1].x, tri.v[1].y, tri.v[1].z);
+            glTexCoord2f(tri.q[2].x/ tri.q[2].z, tri.q[2].y/tri.q[2].z);
+            glVertex3f(tri.v[2].x, tri.v[2].y, tri.v[2].z);
+        } else {
+            glVertex3f(tri.v[0].x, tri.v[0].y, tri.v[0].z);
+            glVertex3f(tri.v[1].x, tri.v[1].y, tri.v[1].z);
+            glVertex3f(tri.v[2].x, tri.v[2].y, tri.v[2].z);
+        }
+
+
+
+
+
 
         glEnd();
     }

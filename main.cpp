@@ -4,11 +4,16 @@
 #include "src/transformation/Matrix.h"
 #include "src/mesh/Triangle.h"
 #include "usage/TestScene.h"
+#include "src/mesh/material/Material.h"
 
 int main() {
-
+    //initialization of the engine with some basic settings
     auto *engine = new Engine();
     auto scene = TestScene();
+    auto mat = Material();
+    mat.getTextureFromFile("../assets/texture/box.jpg"); // to change - material should be a part of a mesh
+    engine->material = mat;
+    engine->drawMaterials = true;
 
     float theta = 0;
     while (engine->isRunning()) {

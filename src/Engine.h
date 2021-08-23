@@ -5,10 +5,12 @@
 #define UNTITLED3_ENGINE_H
 #include <SFML/OpenGL.hpp>
 #include <SFML/Window.hpp>
+#include <SFML/Graphics.hpp>
 #include <vector>
 #include <tuple>
 #include "mesh/Triangle.h"
 #include "scene/Scene.h"
+#include "mesh/material/Material.h"
 
 
 class Engine {
@@ -20,6 +22,8 @@ private:
     sf::Vector2<double> mousePrevPosRelative;
 
 public:
+    Material material;
+    bool drawMaterials = false;
     sf::Vector2<double> mousePosRelative;
     std::vector<sf::Keyboard::Key> keysPressed;
 

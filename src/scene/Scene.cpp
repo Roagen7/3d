@@ -36,7 +36,7 @@ void Scene::project(Matrix matrix) {
             for(int i = 0; i < clipped.amount; i++){
                 Triangle triClipped = clipped.triangles[i];
                 Triangle triProj = triClipped.transform(matrix);
-                triProj.lum = tri.lum;
+//                triProj.lum = tri.lum;
                 triProj.v[0] += sf::Vector3(1.0,1.0,0.0);
                 triProj.v[1] += sf::Vector3(1.0,1.0,0.0);
                 triProj.v[2] += sf::Vector3(1.0,1.0,0.0);
@@ -95,9 +95,9 @@ void Scene::applyLight() {
 //    sf::Vector3<double> lightDir = (  Matrix::getRotationMatrixAxisX(camera.pitch)).multiplyByVector({0,0,-1});
 //    auto lightDir = -camera.lookDir();
 
-    std::cout << camera.lookDir().x <<  " " <<camera.lookDir().y << " "<<camera.lookDir().z<< std::endl;
-
-    std::cout << this->camera.yaw << std::endl;
+//    std::cout << camera.lookDir().x <<  " " <<camera.lookDir().y << " "<<camera.lookDir().z<< std::endl;
+//
+//    std::cout << this->camera.yaw << std::endl;
     lightDir = VectorUtils::normalize(lightDir);
 
     for(auto& tri : this->trisGloballyTransformed){

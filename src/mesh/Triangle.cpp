@@ -25,6 +25,11 @@ Triangle Triangle::fixed(sf::VideoMode windowSize) {
 
     Triangle tri;
     tri.lum = this->lum;
+    tri.q[0] = this->q[0];
+    tri.q[1] = this->q[1];
+    tri.q[2] = this->q[2];
+
+
     tri.v[0].x = -1.0 + 2.0 *   this->v[0].x / windowSize.width;
     tri.v[0].y = 1.0 - 2.0 *  this->v[0].y / windowSize.width;
     tri.v[0].z = 1.0 - 2.0 *  this->v[0].z / windowSize.width;

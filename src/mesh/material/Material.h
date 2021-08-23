@@ -6,7 +6,13 @@
 #define UNTITLED3_MATERIAL_H
 
 
+#include <SFML/Graphics/Texture.hpp>
+
 class Material {
+public:
+    sf::Texture texture;
+    void getTextureFromFile(std::string filename);
+
 
 };
 

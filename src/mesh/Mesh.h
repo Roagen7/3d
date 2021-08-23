@@ -12,6 +12,7 @@
 #include "../transformation/Matrix.h"
 #include "../transformation/VectorUtils.h"
 #include "Triangle.h"
+
 #include <utility>
 #include <fstream>
 #include <iostream>
@@ -25,6 +26,8 @@ class Mesh {
 
 public:
     std::vector<Triangle> triangles;
+
+
     Matrix localTransform = Matrix::getIdentityMatrix();
     void pushTriangle(Triangle tri);
     void setMesh(std::vector<Triangle> tris);
