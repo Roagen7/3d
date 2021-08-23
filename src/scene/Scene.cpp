@@ -3,6 +3,7 @@
 //
 
 #include "Scene.h"
+#include "../transformation/Clip.h"
 
 void Scene::buildFrame(Matrix globalTransformMatrix, Matrix projectionMatrix) {
 
@@ -27,20 +28,23 @@ void Scene::project(Matrix matrix) {
     std::cout << this->camera.yaw << std::endl;
     for(auto tri : this->trisGloballyTransformed){
 
+            Triangle triView = tri.transform(view);
 
-            Triangle triProj = tri.transform(view).transform(matrix);
-            triProj.lum = tri.lum;
-            triProj.v[0] += sf::Vector3(1.0,1.0,0.0);
-            triProj.v[1] += sf::Vector3(1.0,1.0,0.0);
-            triProj.v[2] += sf::Vector3(1.0,1.0,0.0);
-            triProj.v[0] *= 400.0;
-            triProj.v[1] *= 400.0;
-            triProj.v[2] *= 400.0;
+            auto clipped = Clip();
+            clipped.clip({0.0,0.0,0.1}, {0.0,0.0, 1.0}, triView);
 
-            this->trisProjected.push_back(triProj);
-
-
-
+            for(int i = 0; i < clipped.amount; i++){
+                Triangle triClipped = clipped.triangles[i];
+                Triangle triProj = triClipped.transform(matrix);
+                triProj.lum = tri.lum;
+                triProj.v[0] += sf::Vector3(1.0,1.0,0.0);
+                triProj.v[1] += sf::Vector3(1.0,1.0,0.0);
+                triProj.v[2] += sf::Vector3(1.0,1.0,0.0);
+                triProj.v[0] *= 400.0;
+                triProj.v[1] *= 400.0;
+                triProj.v[2] *= 400.0;
+                this->trisProjected.push_back(triProj);
+            }
     }
 }
 

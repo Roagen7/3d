@@ -63,7 +63,7 @@ void Clip::clip(sf::Vector3<double> planeP, sf::Vector3<double> planeN, Triangle
         this->triangles[1].v[0] = *insidePoints[1];
         this->triangles[1].v[1] = this->triangles[0].v[2];
         this->triangles[1].v[2] = VectorUtils::intersectPlane(planeP,planeN, *insidePoints[1], *outsidePoints[0]);
-        
+
         this->amount = 2;
         return;
 
