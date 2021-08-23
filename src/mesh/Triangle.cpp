@@ -39,7 +39,12 @@ Triangle Triangle::fixed(sf::VideoMode windowSize) {
 }
 
 Triangle Triangle::transform(Matrix m) {
-    return {m.multiplyByVector(this->v[0]), m.multiplyByVector(this->v[1]),m.multiplyByVector(this->v[2])};
+    Triangle transformed = {m.multiplyByVector(this->v[0]), m.multiplyByVector(this->v[1]),m.multiplyByVector(this->v[2])};
+    transformed.q[0] = this->q[0];
+    transformed.q[1] = this->q[1];
+    transformed.q[2] = this->q[2];
+    transformed.lum = this->lum;
+    return transformed;
 }
 
 sf::Vector3<double> Triangle::normal() {
@@ -48,5 +53,14 @@ sf::Vector3<double> Triangle::normal() {
     auto line2 = this->v[2] - this->v[0];
     auto normal = VectorUtils::normalize(VectorUtils::cross(line1, line2));
     return normal;
+}
+
+Triangle::Triangle(sf::Vector3<double> f, sf::Vector3<double> s, sf::Vector3<double> t, sf::Vector2<double> t1, sf::Vector2<double> t2, sf::Vector2<double> t3) {
+    this->v[0] = f;
+    this->v[1] = s;
+    this->v[2] = t;
+    this->q[0] = t1;
+    this->q[1] = t2;
+    this->q[2] = t3;
 }
 

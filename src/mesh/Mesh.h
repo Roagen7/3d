@@ -19,15 +19,17 @@
 
 
 class Mesh {
-private:
-    std::vector<Triangle> triangles;
+
+
+
 
 public:
-
+    std::vector<Triangle> triangles;
     Matrix localTransform = Matrix::getIdentityMatrix();
     void pushTriangle(Triangle tri);
     void setMesh(std::vector<Triangle> tris);
     static Mesh getUnitCube();
+    static Mesh getUnitCubeTextured();
     static Mesh loadFromObj(std::string filename);
 
     [[nodiscard]] const std::vector<Triangle> &getTriangles() const;

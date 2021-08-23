@@ -91,9 +91,10 @@ std::vector<Triangle> Scene::getBuiltTris() {
 }
 
 void Scene::applyLight() {
-//    sf::Vector3<double> lightDir(0.0, 1.0, -1.0);
+    sf::Vector3<double> lightDir(0.0, -1.0, -1.0);
 //    sf::Vector3<double> lightDir = (  Matrix::getRotationMatrixAxisX(camera.pitch)).multiplyByVector({0,0,-1});
-    auto lightDir = -camera.lookDir();
+//    auto lightDir = -camera.lookDir();
+
     std::cout << camera.lookDir().x <<  " " <<camera.lookDir().y << " "<<camera.lookDir().z<< std::endl;
 
     std::cout << this->camera.yaw << std::endl;
