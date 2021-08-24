@@ -24,14 +24,14 @@ class Mesh {
 
 public:
     std::vector<Triangle> triangles;
-    Material* material;
+    Material* material = nullptr;
 
     Matrix localTransform = Matrix::getIdentityMatrix();
     void pushTriangle(Triangle tri);
     void setMesh(std::vector<Triangle> tris);
     static Mesh getUnitCube();
     static Mesh getUnitCubeTextured();
-    static Mesh loadFromObj(std::string filename);
+    static Mesh loadFromObj(const std::string& filename, bool hasTexture = false);
 
     [[nodiscard]] const std::vector<Triangle> &getTriangles() const;
     std::vector<Triangle> getTrianglesProjected(float theta);

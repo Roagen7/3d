@@ -108,7 +108,7 @@ std::vector<Triangle> Mesh::getTrianglesProjected(float theta) {
 //    return trianglesProjected;
 }
 
-Mesh Mesh::loadFromObj(std::string filename) {
+Mesh Mesh::loadFromObj(const std::string& filename, bool hasTexture) {
 
     std::ifstream input(filename);
     if(!input.is_open()){
@@ -117,11 +117,11 @@ Mesh Mesh::loadFromObj(std::string filename) {
 
     Mesh m;
     std::vector<sf::Vector3<double>> vs;
-    std::vector<sf::Vector3<double>> ts;
+    std::vector<sf::Vector2<double>> ts;
 
     while(!input.eof()){
-        std::string x;
-        getline(input,x);
+        char x[128];
+        input.getline(x, 128);
         std::strstream l;
         l << x;
         char trash;
@@ -132,15 +132,40 @@ Mesh Mesh::loadFromObj(std::string filename) {
             vs.push_back(v);
 
         } else if(x[0] == 'v' && x[1] == 't'){
-            sf::Vector3<double> t;
+            sf::Vector2<double> t;
             l >> trash >> t.x >> t.y;
-            t.z = 1;
+
             ts.push_back(t);
-        } else if(x[0] == 'f'){
+        } else if(x[0] == 'f'  && !hasTexture ){
             int i[3];
             l >> trash >> i[0] >> i[1] >> i[2];
 
             m.triangles.emplace_back(vs[i[0] - 1], vs[i[1] - 1], vs[i[2] - 1]);
+        } else if(x[0] == 'f' && hasTexture){
+
+            l >> trash;
+
+            std::string tokens[6];
+            int tokenCount = -1;
+
+
+            while (!l.eof())
+            {
+
+                char c = l.get();
+
+                if (c == ' ' || c == '/')
+                    tokenCount++;
+                else
+                    tokens[tokenCount].append(1, c);
+            }
+
+            tokens[tokenCount].pop_back();
+
+
+            m.triangles.emplace_back( vs[stoi(tokens[0]) - 1], vs[stoi(tokens[2]) - 1], vs[stoi(tokens[4]) - 1],
+                                    ts[stoi(tokens[1]) - 1], ts[stoi(tokens[3]) - 1], ts[stoi(tokens[5]) - 1]);
+
         }
     }
     return m;
