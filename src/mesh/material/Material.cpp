@@ -13,3 +13,9 @@ void Material::getTextureFromFile(std::string filename) {
         this->texture = tex;
     }
 }
+
+Material Material::defaultMaterial() {
+    auto mat = Material();
+    mat.texture = sf::Texture();
+    return mat;
+}

@@ -8,9 +8,11 @@
 #include <SFML/System/Vector3.hpp>
 #include <tuple>
 #include "../transformation/Matrix.h"
+#include "material/Material.h"
 
 class Triangle {
 public:
+    Material* material;
     sf::Vector3<double> v[3]; // vertex coordinates
     sf::Vector3<double> q[3]; //texture coordinates
     double lum = 0;

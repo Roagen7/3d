@@ -117,6 +117,7 @@ Mesh Mesh::loadFromObj(std::string filename) {
 
     Mesh m;
     std::vector<sf::Vector3<double>> vs;
+    std::vector<sf::Vector3<double>> ts;
 
     while(!input.eof()){
         std::string x;
@@ -130,6 +131,11 @@ Mesh Mesh::loadFromObj(std::string filename) {
             l >> trash >> v.x >> v.y >> v.z;
             vs.push_back(v);
 
+        } else if(x[0] == 'v' && x[1] == 't'){
+            sf::Vector3<double> t;
+            l >> trash >> t.x >> t.y;
+            t.z = 1;
+            ts.push_back(t);
         } else if(x[0] == 'f'){
             int i[3];
             l >> trash >> i[0] >> i[1] >> i[2];

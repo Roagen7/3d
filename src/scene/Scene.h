@@ -21,6 +21,7 @@ protected:
     Camera camera;
     std::vector<Mesh> meshes;
     std::vector<Light> lights;
+    std::vector<Material> materials; // all of the materials that are supposed to be used
 public:
     void pushMesh(const Mesh& m);
 

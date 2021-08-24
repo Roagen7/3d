@@ -54,6 +54,7 @@ void Clip::clip(sf::Vector3<double> planeP, sf::Vector3<double> planeN, Triangle
     }
     if(insidePointsCount == 3){
         this->triangles[0] = inTri;
+
         this->amount = 1;
         return;
     }
@@ -77,6 +78,8 @@ void Clip::clip(sf::Vector3<double> planeP, sf::Vector3<double> planeN, Triangle
         this->triangles[0].q[2].x = t * (outsideTex[1]->x - insideTex[0]->x) + insideTex[0]->x;
         this->triangles[0].q[2].y = t * (outsideTex[1]->y - insideTex[0]->y) + insideTex[0]->y;
         this->triangles[0].q[2].z = t * (outsideTex[1]->z - insideTex[0]->z) + insideTex[0]->z;
+
+        this->triangles[0].material = inTri.material;
 
         this->amount = 1;
         return;
@@ -106,6 +109,9 @@ void Clip::clip(sf::Vector3<double> planeP, sf::Vector3<double> planeN, Triangle
         this->triangles[1].q[2].x = t * (outsideTex[0]->x - insideTex[1]->x) + insideTex[1]->x;
         this->triangles[1].q[2].y = t * (outsideTex[0]->y - insideTex[1]->y) + insideTex[1]->y;
         this->triangles[1].q[2].z = t * (outsideTex[0]->z - insideTex[1]->z) + insideTex[1]->z;
+
+        this->triangles[0].material = inTri.material;
+        this->triangles[1].material = inTri.material;
 
         this->amount = 2;
         return;

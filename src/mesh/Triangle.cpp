@@ -12,6 +12,7 @@ Triangle::Triangle(sf::Vector3<double> f, sf::Vector3<double> s, sf::Vector3<dou
     this->v[0] = f;
     this->v[1] = s;
     this->v[2] = t;
+    this->material = nullptr;
 }
 
 
@@ -19,12 +20,14 @@ Triangle::Triangle() {
     this->v[0] = sf::Vector3<double>(0,0,0);
     this->v[1] = sf::Vector3<double>(0,0,0);
     this->v[2] = sf::Vector3<double>(0,0,0);
+    this->material = nullptr;
 }
 
 Triangle Triangle::fixed(sf::VideoMode windowSize) {
 
     Triangle tri;
     tri.lum = this->lum;
+    tri.material = this->material;
     tri.q[0] = this->q[0];
     tri.q[1] = this->q[1];
     tri.q[2] = this->q[2];
@@ -49,6 +52,7 @@ Triangle Triangle::transform(Matrix m) {
     transformed.q[1] = this->q[1];
     transformed.q[2] = this->q[2];
     transformed.lum = this->lum;
+    transformed.material = this->material;
     return transformed;
 }
 
@@ -73,6 +77,8 @@ Triangle::Triangle(sf::Vector3<double> f, sf::Vector3<double> s, sf::Vector3<dou
     this->q[2].x = t3.x;
     this->q[2].y = t3.y;
     this->q[2].z = 1;
+    this->material = nullptr;
+
 }
 
 Triangle Triangle::transformHomog(Matrix m, double& w0, double& w1, double& w2) {

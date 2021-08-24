@@ -37,15 +37,17 @@ void Scene::project(Matrix matrix) {
 
                 double w0,w1,w2;
                 Triangle triClipped = clipped.triangles[i];
-                Triangle triProj = triClipped.transformHomog(matrix, w0,w1,w2);
-                triProj.lum = tri.lum;
-                triProj.q[0] /=  w0;
-//                triProj.q[0].z = 1 / w0;
+                Triangle triProj = triClipped.transform(matrix);
 
-                triProj.q[1] /= w1;
-//                triProj.q[1].z = 1 / w1;
-                std::cout << triProj.q[0].z << " " << triProj.q[1].z << triProj.q[2].z << std::endl;
-                triProj.q[2] /= w2;
+//                Triangle triProj = triClipped.transformHomog(matrix, w0,w1,w2);
+//                triProj.lum = tri.lum;
+//                triProj.q[0] /=  w0;
+////                triProj.q[0].z = 1 / w0;
+//
+//                triProj.q[1] /= w1;
+////                triProj.q[1].z = 1 / w1;
+//                std::cout << triProj.q[0].z << " " << triProj.q[1].z << triProj.q[2].z << std::endl;
+//                triProj.q[2] /= w2;
 //                triProj.q[2].z = 1 / w2;
 
                 triProj.v[0] += sf::Vector3(1.0,1.0,0.0);
@@ -64,6 +66,8 @@ void Scene::localTransform() {
     for(const auto& m : this->meshes){
         for(auto tri : m.getTriangles()){
             tri = tri.transform(m.localTransform);
+            tri.material = m.material;
+//            std::cout << m.material->texture.getSize().x << std::endl;
             this->trisLocallyTransformed.push_back(tri);
         }
     }

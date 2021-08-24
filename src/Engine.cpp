@@ -68,17 +68,22 @@ void Engine::drawTriangles() {
     for(Triangle tri : triangles){
 //        sf::Texture tex;
         glHint(GL_PERSPECTIVE_CORRECTION_HINT,GL_NICEST);
-        if(this->drawMaterials){
+        if(this->drawMaterials && tri.material != nullptr){
             glEnable(GL_TEXTURE_2D);
-            sf::Texture::bind(&this->material.texture);
+            sf::Texture::bind(&tri.material->texture);
         }
 
-
+//        if(tri.material != nullptr){
+//            std::cout << tri.material->texture.getSize().x << std::endl;
+//        }
+//        if(tri.material->texture){
+//            std::cout << "tats" << std::endl;
+//        }
 
         glBegin(GL_TRIANGLES);
         glColor3f(tri.lum, tri.lum, tri.lum);
 
-        if(this->drawMaterials){
+        if(this->drawMaterials && tri.material != nullptr){
             glTexCoord2f(tri.q[0].x/tri.q[0].z, tri.q[0].y/tri.q[0].z);
             glVertex3f(tri.v[0].x, tri.v[0].y, tri.v[0].z);
             glTexCoord2f(tri.q[1].x/tri.q[1].z, tri.q[1].y/tri.q[1].z);
@@ -115,6 +120,7 @@ void Engine::fixTriangles() {
 void Engine::drawSceneFrame(Scene scene,Matrix globalTransformMatrix, Matrix projectionMatrix) {
     scene.buildFrame(globalTransformMatrix, projectionMatrix);
     for(auto tri : scene.getBuiltTris()){
+
         this->pushTriangle(tri);
     }
     scene.cleanup();
