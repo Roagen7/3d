@@ -66,17 +66,20 @@ sf::Vector3<double> Triangle::normal() {
 
 Triangle::Triangle(sf::Vector3<double> f, sf::Vector3<double> s, sf::Vector3<double> t, sf::Vector2<double> t1, sf::Vector2<double> t2, sf::Vector2<double> t3) {
     this->v[0] = f;
-    this->v[1] = s;
-    this->v[2] = t;
     this->q[0].x = t1.x;
     this->q[0].y = t1.y;
     this->q[0].z = 1;
+
+    this->v[1] = s;
     this->q[1].x = t2.x;
     this->q[1].y = t2.y;
     this->q[1].z = 1;
+
+    this->v[2] = t;
     this->q[2].x = t3.x;
     this->q[2].y = t3.y;
     this->q[2].z = 1;
+
     this->material = nullptr;
 
 }

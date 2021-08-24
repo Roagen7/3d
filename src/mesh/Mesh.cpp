@@ -114,7 +114,7 @@ Mesh Mesh::loadFromObj(const std::string& filename, bool hasTexture) {
     if(!input.is_open()){
         return {};
     }
-
+    int lineCount = 1;
     Mesh m;
     std::vector<sf::Vector3<double>> vs;
     std::vector<sf::Vector2<double>> ts;
@@ -132,42 +132,55 @@ Mesh Mesh::loadFromObj(const std::string& filename, bool hasTexture) {
             vs.push_back(v);
 
         } else if(x[0] == 'v' && x[1] == 't'){
+//            std::cout << x << std::endl;
+
             sf::Vector2<double> t;
-            l >> trash >> t.x >> t.y;
-
+            l >> trash >>trash>> t.x >> t.y;
+//            std::cout <<lineCount<<trash <<trash<< " " << t.x << " " << t.y<< std::endl;
+            std::cout << t.x <<" " << t.y << std::endl;
+//            t.x = 1.0 - t.x;
+            t.y = 1.0 - t.y;
             ts.push_back(t);
-        } else if(x[0] == 'f'  && !hasTexture ){
-            int i[3];
-            l >> trash >> i[0] >> i[1] >> i[2];
 
-            m.triangles.emplace_back(vs[i[0] - 1], vs[i[1] - 1], vs[i[2] - 1]);
-        } else if(x[0] == 'f' && hasTexture){
+        } else if(x[0] == 'f' ){
+            if(!hasTexture){
+                std::cout << "tatsa" << std::endl;
+                int i[3];
+                l >> trash >> i[0] >> i[1] >> i[2];
 
-            l >> trash;
+                m.triangles.emplace_back(vs[i[0] - 1], vs[i[1] - 1], vs[i[2] - 1]);
+            } else {
+                l >> trash;
 
-            std::string tokens[6];
-            int tokenCount = -1;
+                std::string tokens[6];
+                int tokenCount = -1;
 
 
-            while (!l.eof())
-            {
+                while (!l.eof())
+                {
 
-                char c = l.get();
+                    char c = l.get();
 
-                if (c == ' ' || c == '/')
-                    tokenCount++;
-                else
-                    tokens[tokenCount].append(1, c);
+                    if (c == ' ' || c == '/')
+                        tokenCount++;
+                    else
+                        tokens[tokenCount].append(1, c);
+                }
+
+                tokens[tokenCount].pop_back();
+
+                //            std::cout << ts[stoi(tokens[1]) - 1].x << std::endl;
+                //            std::cout << tokens[0] <<"/" << tokens[1] <<" " << tokens[2] << "/" << tokens[3] << " " <<tokens[4] <<  "/"<<tokens[5] << std::endl;
+
+
+                m.triangles.emplace_back( vs[stoi(tokens[0]) - 1], vs[stoi(tokens[2]) - 1], vs[stoi(tokens[4]) - 1],
+                                          ts[stoi(tokens[1]) - 1], ts[stoi(tokens[3]) - 1], ts[stoi(tokens[5]) - 1]);
+
             }
-
-            tokens[tokenCount].pop_back();
-
-
-            m.triangles.emplace_back( vs[stoi(tokens[0]) - 1], vs[stoi(tokens[2]) - 1], vs[stoi(tokens[4]) - 1],
-                                    ts[stoi(tokens[1]) - 1], ts[stoi(tokens[3]) - 1], ts[stoi(tokens[5]) - 1]);
-
         }
+        lineCount++;
     }
+//    std::cout << ts.size() << std::endl;
     return m;
 }
 

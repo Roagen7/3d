@@ -24,4 +24,5 @@
 </li>
 </ul>
 
-![](show.gif)
+![](docs/spy.png)
+![](docs/show.gif)

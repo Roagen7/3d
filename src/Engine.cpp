@@ -71,6 +71,8 @@ void Engine::drawTriangles() {
         if(this->drawMaterials && tri.material != nullptr){
             glEnable(GL_TEXTURE_2D);
             sf::Texture::bind(&tri.material->texture);
+
+//            sf::Texture::bind(&this->material.texture);
         }
 
 //        if(tri.material != nullptr){
@@ -84,11 +86,12 @@ void Engine::drawTriangles() {
         glColor3f(tri.lum, tri.lum, tri.lum);
 
         if(this->drawMaterials && tri.material != nullptr){
-            glTexCoord2f(tri.q[0].x/tri.q[0].z, tri.q[0].y/tri.q[0].z);
+
+            glTexCoord2f(tri.q[0].x, tri.q[0].y);
             glVertex3f(tri.v[0].x, tri.v[0].y, tri.v[0].z);
-            glTexCoord2f(tri.q[1].x/tri.q[1].z, tri.q[1].y/tri.q[1].z);
+            glTexCoord2f(tri.q[1].x, tri.q[1].y);
             glVertex3f(tri.v[1].x, tri.v[1].y, tri.v[1].z);
-            glTexCoord2f(tri.q[2].x/ tri.q[2].z, tri.q[2].y/tri.q[2].z);
+            glTexCoord2f(tri.q[2].x, tri.q[2].y);
             glVertex3f(tri.v[2].x, tri.v[2].y, tri.v[2].z);
         } else {
             glVertex3f(tri.v[0].x, tri.v[0].y, tri.v[0].z);

@@ -11,7 +11,7 @@ int main() {
     auto *engine = new Engine();
     auto scene = TestScene();
     auto mat = Material();
-    mat.getTextureFromFile("../assets/texture/box.jpg"); // to change - material should be a part of a mesh
+    mat.getTextureFromFile("../assets/texture/hammer.jpg"); // to change - material should be a part of a mesh
     engine->material = mat;
     engine->drawMaterials = true;
 

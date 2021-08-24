@@ -110,17 +110,18 @@ void Scene::applyLight() {
     //TODO: add light sources
     sf::Vector3<double> lightDir(0.0, -1.0, -1.0);
 //    sf::Vector3<double> lightDir = (  Matrix::getRotationMatrixAxisX(camera.pitch)).multiplyByVector({0,0,-1});
-//    auto lightDir = -camera.lookDir();
+    lightDir = -camera.lookDir();
 
 //    std::cout << camera.lookDir().x <<  " " <<camera.lookDir().y << " "<<camera.lookDir().z<< std::endl;
 //
 //    std::cout << this->camera.yaw << std::endl;
-    lightDir = VectorUtils::normalize(lightDir);
+//    lightDir = VectorUtils::normalize(lightDir);
 
     for(auto& tri : this->trisGloballyTransformed){
         auto normal = tri.normal();
         auto lum = VectorUtils::dot(normal, lightDir);
         tri.lum = std::max(0.1,lum);
+        tri.lum = 1;
     }
 }
 
