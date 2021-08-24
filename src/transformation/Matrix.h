@@ -12,6 +12,8 @@ class Matrix {
 public:
     float m[4][4] = { 0 };
     sf::Vector3<double> multiplyByVector(sf::Vector3<double> v);
+    sf::Vector3<double> multiplyByVectorHomog(sf::Vector3<double> v, double& w);
+
     Matrix getInverse();
     static Matrix getProjectionMatrix(sf::Vector2u screenSize);
     static Matrix getRotationMatrixAxisX(double rad);

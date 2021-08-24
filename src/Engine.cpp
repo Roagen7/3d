@@ -67,7 +67,7 @@ void Engine::drawTriangles() {
 
     for(Triangle tri : triangles){
 //        sf::Texture tex;
-
+        glHint(GL_PERSPECTIVE_CORRECTION_HINT,GL_NICEST);
         if(this->drawMaterials){
             glEnable(GL_TEXTURE_2D);
             sf::Texture::bind(&this->material.texture);
@@ -90,12 +90,6 @@ void Engine::drawTriangles() {
             glVertex3f(tri.v[1].x, tri.v[1].y, tri.v[1].z);
             glVertex3f(tri.v[2].x, tri.v[2].y, tri.v[2].z);
         }
-
-
-
-
-
-
         glEnd();
     }
 }

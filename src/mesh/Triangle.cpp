@@ -75,3 +75,12 @@ Triangle::Triangle(sf::Vector3<double> f, sf::Vector3<double> s, sf::Vector3<dou
     this->q[2].z = 1;
 }
 
+Triangle Triangle::transformHomog(Matrix m, double& w0, double& w1, double& w2) {
+    Triangle transformed = {m.multiplyByVectorHomog(this->v[0],w0), m.multiplyByVectorHomog(this->v[1], w1),m.multiplyByVectorHomog(this->v[2], w2)};
+    transformed.q[0] = this->q[0];
+    transformed.q[1] = this->q[1];
+    transformed.q[2] = this->q[2];
+    transformed.lum = this->lum;
+    return transformed;
+}
+

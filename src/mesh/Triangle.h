@@ -18,6 +18,7 @@ public:
     Triangle(sf::Vector3<double> f, sf::Vector3<double> s, sf::Vector3<double> t, sf::Vector2<double> t1, sf::Vector2<double> t2, sf::Vector2<double> t3);
     Triangle fixed(sf::VideoMode windowSize);
     Triangle transform(Matrix m);
+    Triangle transformHomog(Matrix m, double& w0, double& w1, double& w2);
 
     sf::Vector3<double> normal();
     Triangle();
