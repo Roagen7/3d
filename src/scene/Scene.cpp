@@ -46,9 +46,14 @@ void Scene::project(Matrix matrix) {
                 triProj.v[0] += sf::Vector3(1.0,1.0,0.0);
                 triProj.v[1] += sf::Vector3(1.0,1.0,0.0);
                 triProj.v[2] += sf::Vector3(1.0,1.0,0.0);
-                triProj.v[0] *= 400.0;
-                triProj.v[1] *= 400.0;
-                triProj.v[2] *= 400.0;
+
+                triProj.v[0].x *= (double) this->windowSize.x / 2;
+                triProj.v[0].y *= (double) this->windowSize.y / 2;
+                triProj.v[1].x *= (double) this->windowSize.x / 2;
+                triProj.v[1].y *= (double) this->windowSize.y / 2;
+                triProj.v[2].x *= (double) this->windowSize.x / 2;
+                triProj.v[2].y *= (double) this->windowSize.y / 2;
+
                 this->trisProjected.push_back(triProj);
             }
     }

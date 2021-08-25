@@ -38,7 +38,7 @@ void Engine::mapEvents() {
 
 
 void Engine::render() {
-    glClearColor(bgColor.r,bgColor.g,bgColor.b,bgColor.a);
+    glClearColor(bgColor.r/255.0,bgColor.g/255.0,bgColor.b/255.0,bgColor.a/255.0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 
@@ -119,6 +119,7 @@ void Engine::drawSceneFrame(Scene* scene, Matrix globalTransformMatrix, Matrix p
         this->pushTriangle(tri);
     }
     scene->cleanup();
+
 }
 
 sf::Vector2u Engine::getWindowSize() {
