@@ -27,28 +27,21 @@ void Scene::project(Matrix matrix) {
 
 
     for(auto tri : this->trisGloballyTransformed){
-
+            //transform to view space
             Triangle triView = tri.transform(view);
 
+
+            //clip triangles
             auto clipped = Clip();
             clipped.clip({0.0,0.0,0.1}, {0.0,0.0, 1.0}, triView);
 
             for(int i = 0; i < clipped.amount; i++){
 
-                double w0,w1,w2;
+//                double w0,w1,w2;
                 Triangle triClipped = clipped.triangles[i];
-                Triangle triProj = triClipped.transform(matrix);
 
-//                Triangle triProj = triClipped.transformHomog(matrix, w0,w1,w2);
-//                triProj.lum = tri.lum;
-//                triProj.q[0] /=  w0;
-////                triProj.q[0].z = 1 / w0;
-//
-//                triProj.q[1] /= w1;
-////                triProj.q[1].z = 1 / w1;
-//                std::cout << triProj.q[0].z << " " << triProj.q[1].z << triProj.q[2].z << std::endl;
-//                triProj.q[2] /= w2;
-//                triProj.q[2].z = 1 / w2;
+                //project the clipped triangles
+                Triangle triProj = triClipped.transform(matrix);
 
                 triProj.v[0] += sf::Vector3(1.0,1.0,0.0);
                 triProj.v[1] += sf::Vector3(1.0,1.0,0.0);
@@ -110,7 +103,7 @@ void Scene::applyLight() {
     //TODO: add light sources
     sf::Vector3<double> lightDir(0.0, -1.0, -1.0);
 //    sf::Vector3<double> lightDir = (  Matrix::getRotationMatrixAxisX(camera.pitch)).multiplyByVector({0,0,-1});
-    lightDir = -camera.lookDir();
+//    lightDir = -camera.lookDir();
 
 //    std::cout << camera.lookDir().x <<  " " <<camera.lookDir().y << " "<<camera.lookDir().z<< std::endl;
 //
@@ -121,7 +114,7 @@ void Scene::applyLight() {
         auto normal = tri.normal();
         auto lum = VectorUtils::dot(normal, lightDir);
         tri.lum = std::max(0.1,lum);
-        tri.lum = 1;
+//        tri.lum = 1;
     }
 }
 
@@ -137,3 +130,9 @@ void Scene::painterSort() {
 void Scene::updateProperties(std::vector<sf::Keyboard::Key> keysPressed, sf::Vector2<double> mouseDelta) {
 
 }
+
+Scene::Scene(){
+    this->windowSize = {800,800};
+
+}
+

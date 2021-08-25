@@ -23,9 +23,14 @@ protected:
     std::vector<Light> lights;
     //materials[0] = default material
     std::vector<Material> materials = {Material::defaultMaterial()}; // all of the materials that are supposed to be used
-public:
-    void pushMesh(const Mesh& m);
 
+
+public:
+    sf::Vector2u windowSize;
+    Scene();
+
+
+    void pushMesh(const Mesh& m);
 
     void localTransform();
     void globalTransform(Matrix matrix);

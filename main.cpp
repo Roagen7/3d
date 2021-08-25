@@ -10,19 +10,15 @@ int main() {
     //initialization of the engine with some basic settings
     auto *engine = new Engine();
     auto scene = TestScene();
-    auto mat = Material();
-    mat.getTextureFromFile("../assets/texture/hammer.jpg"); // to change - material should be a part of a mesh
-    engine->material = mat;
     engine->drawMaterials = true;
+    engine->bgColor = sf::Color::Cyan;
 
-    float theta = 0;
     while (engine->isRunning()) {
 
         auto proj = Matrix::getProjectionMatrix(engine->getWindowSize());
-        auto globTransf =   Matrix::getRotationMatrixAxisX(theta) * Matrix::getRotationMatrixAxisZ(theta) * Matrix::getTranslationMarix({0.0,0.0,15.0});
-        globTransf = Matrix::getIdentityMatrix();
-        theta += 0.01;
-        engine->drawSceneFrame(scene, globTransf, proj);
+        auto globTransf = Matrix::getIdentityMatrix();
+
+        engine->drawSceneFrame(&scene, globTransf, proj);
         scene.updateProperties(engine->keysPressed, engine->getMouseDelta());
         engine->run();
     }

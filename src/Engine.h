@@ -21,8 +21,10 @@ private:
     sf::VideoMode windowSize;
     sf::Vector2<double> mousePrevPosRelative;
 
+
 public:
     Material material;
+    sf::Color bgColor = sf::Color::Black;
     bool drawMaterials = false;
     sf::Vector2<double> mousePosRelative;
     std::vector<sf::Keyboard::Key> keysPressed;
@@ -41,7 +43,7 @@ public:
     void fixTriangles();
     void drawTriangles();
     void emptyTriangles();
-    void drawSceneFrame(Scene scene, Matrix transformMatrix, Matrix projectionMatrix);
+    void drawSceneFrame(Scene* scene, Matrix transformMatrix, Matrix projectionMatrix);
 
     void run();
 

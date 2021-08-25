@@ -132,12 +132,12 @@ Mesh Mesh::loadFromObj(const std::string& filename, bool hasTexture) {
             vs.push_back(v);
 
         } else if(x[0] == 'v' && x[1] == 't'){
-//            std::cout << x << std::endl;
+
 
             sf::Vector2<double> t;
             l >> trash >>trash>> t.x >> t.y;
-//            std::cout <<lineCount<<trash <<trash<< " " << t.x << " " << t.y<< std::endl;
-            std::cout << t.x <<" " << t.y << std::endl;
+
+
 //            t.x = 1.0 - t.x;
             t.y = 1.0 - t.y;
             ts.push_back(t);
