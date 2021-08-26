@@ -6,7 +6,17 @@
 #define UNTITLED3_SPHERECOLLIDER_H
 
 
-class SphereCollider {
+#include "Collider.h"
+
+class SphereCollider : public Collider {
+public:
+    sf::Vector3<double> translation;
+    double radius;
+
+    SphereCollider(int id,sf::Vector3<double> translation, double radius);
+
+    sf::Vector3<double> collide(std::vector<Collider> colliders) override;
+
 
 };
 

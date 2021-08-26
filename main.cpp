@@ -6,11 +6,12 @@
 #include "usage/TestScene.h"
 #include "src/mesh/material/Material.h"
 #include "usage/GravityScene.h"
+#include "usage/CollisionScene.h"
 
 int main() {
     //initialization of the engine with some basic settings
     auto *engine = new Engine();
-    auto scene = GravityScene();
+    auto scene = CollisionScene();
     engine->drawMaterials = true;
     engine->bgColor = sf::Color(0x1e2852);
 

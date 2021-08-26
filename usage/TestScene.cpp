@@ -5,16 +5,8 @@
 #include "TestScene.h"
 
 TestScene::TestScene() : Scene() {
-    //pushing meshes
-//    auto ob = Mesh::loadFromObj("../assets/mesh/WC.obj");
-//    auto ob2 = Mesh::loadFromObj("../assets/mesh/mountains.obj");
-
-
-
     this->initMaterials();
     this->initObjects();
-
-
 }
 
 void TestScene::updateProperties(std::vector<sf::Keyboard::Key> keysPressed, sf::Vector2<double> mouseDelta) {

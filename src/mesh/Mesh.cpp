@@ -144,7 +144,7 @@ Mesh Mesh::loadFromObj(const std::string& filename, bool hasTexture) {
 
         } else if(x[0] == 'f' ){
             if(!hasTexture){
-                std::cout << "tatsa" << std::endl;
+//                std::cout << "tatsa" << std::endl;
                 int i[3];
                 l >> trash >> i[0] >> i[1] >> i[2];
 
