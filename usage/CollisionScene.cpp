@@ -3,6 +3,14 @@
 //
 
 #include "CollisionScene.h"
+#include "../src/spatial/collider/SphereCollider.h"
+
+
+
+
+
+
+
 
 CollisionScene::CollisionScene() {
     this->initMaterials();
@@ -21,8 +29,31 @@ void CollisionScene::initObjects() {
     auto sph2 = Mesh::loadFromObj("../assets/mesh/sphere.obj", true);
     sph1.material = &this->materials[1];
     sph2.material = &this->materials[1];
+    auto col1 = SphereCollider(0);
+    col1.radius = 1;
+    auto col2 = SphereCollider(1);
+    col2.radius = 1;
+
     this->pushMesh(sph1);
+    this->pushSphereCollider(col1);
     this->pushMesh(sph2);
+    this->pushSphereCollider(col2);
+
+    auto n1 = BallNode(&this->meshes[0], &this->sphereColliders[0]);
+    auto n2 = BallNode(&this->meshes[1], &this->sphereColliders[1]);
+
+    n1.position = {0,0,5};
+    n2.position = {10,0,0};
+
+    n1.setTranslation(n1.position);
+    n1.velocity = {0,0,-0.02};
+
+    n2.setTranslation(n2.position);
+    n2.velocity = {-0.04,0,0};
+
+    this->balls.push_back(n1);
+    this->balls.push_back(n2);
+
 }
 
 void CollisionScene::updateProperties(std::vector<sf::Keyboard::Key> keysPressed, sf::Vector2<double> mouseDelta) {
@@ -53,6 +84,24 @@ void CollisionScene::updateProperties(std::vector<sf::Keyboard::Key> keysPressed
     this->camera.pitch = std::max(-2.8,std::min(2.8, this->camera.pitch));
     this->camera.yaw -= mouseDelta.x * LOOKSENS;
     this->camera.pitch -= mouseDelta.y * LOOKSENS;
+
+
+    for(auto &n : this->balls){
+
+        n.position += n.velocity;
+        n.setTranslation(n.position);
+        n.sphCollider->collide(this->sphereColliders);
+    }
+
+
+
+    for(auto col : this->sphereColliders){
+        col.collide(this->sphereColliders);
+
+
+
+
+    }
 
 
 }

@@ -5,6 +5,16 @@
 #include "Scene.h"
 #include "../transformation/Clip.h"
 
+
+void Scene::pushMesh(const Mesh& m) {
+    this->meshes.push_back(m);
+}
+
+
+void Scene::pushSphereCollider(const SphereCollider &c) {
+    this->sphereColliders.push_back(c);
+}
+
 void Scene::buildFrame(Matrix globalTransformMatrix, Matrix projectionMatrix) {
 
 //    this->updateProperties();
@@ -94,9 +104,7 @@ void Scene::cleanup() {
     this->trisGloballyTransformed.clear();
 }
 
-void Scene::pushMesh(const Mesh& m) {
-    this->meshes.push_back(m);
-}
+
 
 std::vector<Triangle> Scene::getBuiltTris() {
 

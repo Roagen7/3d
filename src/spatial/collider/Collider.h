@@ -19,7 +19,8 @@ public:
 
     int id;
     std::string name;
-    explicit Collider(int id);
+    sf::Vector3<double> translation;
+    explicit Collider(int id, std::string name = Collider::BaseName);
 
 
     virtual sf::Vector3<double> collide(std::vector<Collider> colliders);

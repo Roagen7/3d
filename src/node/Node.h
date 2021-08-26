@@ -6,8 +6,21 @@
 #define UNTITLED3_NODE_H
 
 
-class Node {
+#include "../mesh/Mesh.h"
+#include "../spatial/collider/Collider.h"
+#include "../spatial/collider/SphereCollider.h"
 
+class Node {
+public:
+    Mesh *mesh;
+    Collider *collider;
+    SphereCollider *sphCollider = nullptr;
+
+    Node(Mesh *mesh, Collider *collider);
+    Node(Mesh *mesh, SphereCollider *sphCollider);
+    Node();
+
+    void setTranslation(sf::Vector3<double> v);
 };
 
 

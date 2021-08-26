@@ -22,6 +22,9 @@
 </li>
 <li>child-parent model of applying transformations
 </li>
+<li>time delta
+</li>
+
 </ul>
 
 ![](docs/spy.png)

@@ -10,12 +10,12 @@
 
 class SphereCollider : public Collider {
 public:
-    sf::Vector3<double> translation;
+
     double radius;
 
     SphereCollider(int id,sf::Vector3<double> translation, double radius);
-
-    sf::Vector3<double> collide(std::vector<Collider> colliders) override;
+    explicit SphereCollider(int id);
+    sf::Vector3<double> collide(std::vector<SphereCollider> sphereColliders);
 
 
 };

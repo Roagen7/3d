@@ -10,6 +10,8 @@
 #include "../transformation/VectorUtils.h"
 #include "../spatial/light/Light.h"
 #include "../spatial/camera/Camera.h"
+#include "../spatial/collider/Collider.h"
+#include "../spatial/collider/SphereCollider.h"
 
 class Scene {
 private:
@@ -20,9 +22,10 @@ protected:
     //children
     Camera camera;
     std::vector<Mesh> meshes;
+    std::vector<SphereCollider> sphereColliders;
     std::vector<Light> lights;
-    //materials[0] = default material
-    std::vector<Material> materials = {Material::defaultMaterial()}; // all of the materials that are supposed to be used
+
+    std::vector<Material> materials = {Material::defaultMaterial()}; // all of the materials that are supposed to be used and default
 
 
 public:
@@ -31,7 +34,7 @@ public:
 
 
     void pushMesh(const Mesh& m);
-
+    void pushSphereCollider(const SphereCollider& c);
     void localTransform();
     void globalTransform(Matrix matrix);
     void painterSort();
