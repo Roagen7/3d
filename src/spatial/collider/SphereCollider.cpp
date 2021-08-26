@@ -38,3 +38,11 @@ sf::Vector3<double> SphereCollider::collide(std::vector<SphereCollider> sphereCo
 
     return {};
 }
+
+bool SphereCollider::checkCollision(SphereCollider sp1, SphereCollider sp2) {
+    sf::Vector3<double> d = sp1.translation - sp2.translation;
+    double dLenSq = VectorUtils::dot(d,d);
+    double rSumSq= (sp1.radius + sp2.radius) * (sp1.radius + sp2.radius);
+    return dLenSq <= rSumSq;
+
+}

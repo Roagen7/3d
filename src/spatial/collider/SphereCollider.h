@@ -16,7 +16,7 @@ public:
     SphereCollider(int id,sf::Vector3<double> translation, double radius);
     explicit SphereCollider(int id);
     sf::Vector3<double> collide(std::vector<SphereCollider> sphereColliders);
-
+    static bool checkCollision( SphereCollider sp1,  SphereCollider sp2);
 
 };
 

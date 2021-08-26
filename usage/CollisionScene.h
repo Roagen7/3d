@@ -10,6 +10,7 @@
 #include "../src/node/Node.h"
 class BallNode : public Node {
 public:
+    double mass = 0;
     sf::Vector3<double> position = {0,0,0};
     sf::Vector3<double> velocity = {0,0,0};
     BallNode(Mesh* mesh, SphereCollider* collider) : Node(mesh, collider) {};

@@ -90,18 +90,21 @@ void CollisionScene::updateProperties(std::vector<sf::Keyboard::Key> keysPressed
 
         n.position += n.velocity;
         n.setTranslation(n.position);
-        n.sphCollider->collide(this->sphereColliders);
+    }
+
+    for(int i = 0; i < this->balls.size(); i++){
+        for(int j = i + 1; j < this->balls.size(); j++){
+            auto& n1 = this->balls[i];
+            auto& n2 = this->balls[j];
+
+            if(SphereCollider::checkCollision(*n1.sphCollider,*n2.sphCollider)){
+                
+
+            }
+        }
     }
 
 
-
-    for(auto col : this->sphereColliders){
-        col.collide(this->sphereColliders);
-
-
-
-
-    }
 
 
 }
