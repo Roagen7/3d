@@ -11,10 +11,12 @@
 </li>
 <li>adding multiple meshes
 </li>
+<li>sphere collider
+</li>
 </ul>
 <div>todo</div>
 <ul>
-<li>aabb collider, sphere colider
+<li>aabb collider
 </li>
 <li>materials
 </li>
