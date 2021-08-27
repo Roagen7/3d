@@ -112,8 +112,10 @@ Mesh Mesh::loadFromObj(const std::string& filename, bool hasTexture) {
 
     std::ifstream input(filename);
     if(!input.is_open()){
+        std::cout << "[ERROR] COULDN'T OPEN FILE " + filename << std::endl;
         return {};
     }
+
     int lineCount = 1;
     Mesh m;
     std::vector<sf::Vector3<double>> vs;
@@ -160,12 +162,13 @@ Mesh Mesh::loadFromObj(const std::string& filename, bool hasTexture) {
                 {
 
                     char c = l.get();
-
+//                    std::cout << "tuta" << std::endl;
                     if (c == ' ' || c == '/')
                         tokenCount++;
                     else
                         tokens[tokenCount].append(1, c);
                 }
+
 
                 tokens[tokenCount].pop_back();
 

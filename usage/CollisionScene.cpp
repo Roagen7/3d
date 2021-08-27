@@ -45,11 +45,15 @@ void CollisionScene::initObjects() {
     n1.position = {0,0,5};
     n2.position = {10,0,0};
 
+    n1.mass = 1;
+    n2.mass = 3;
+
+
     n1.setTranslation(n1.position);
-    n1.velocity = {0,0,-0.02};
+    n1.velocity = {0,0,-0.04};
 
     n2.setTranslation(n2.position);
-    n2.velocity = {-0.04,0,0};
+    n2.velocity = {-0.1,0,0};
 
     this->balls.push_back(n1);
     this->balls.push_back(n2);
@@ -98,7 +102,25 @@ void CollisionScene::updateProperties(std::vector<sf::Keyboard::Key> keysPressed
             auto& n2 = this->balls[j];
 
             if(SphereCollider::checkCollision(*n1.sphCollider,*n2.sphCollider)){
-                
+
+                std::cout << "tutajj" << std::endl;
+//                auto x1 = n1.position;
+//                auto x2 = n2.position;
+//                auto m1 = n1.mass;
+//                auto m2 = n2.mass;
+//
+//                auto v1 = n1.velocity;
+//                auto v2 = n2.velocity;
+//
+//                auto r = x2-x1;
+//                auto rLenSq = VectorUtils::dot(r,r) * VectorUtils::dot(r,r);
+//
+//                sf::Vector3<double> v1p = v1 - (x1 - x2)  *  VectorUtils::dot(v1-v2,x1-x2)   * (double) 2 * m2 /(m1 + m2) / rLenSq;
+//                sf::Vector3<double> v2p = v2 - (x2 - x1)  *  VectorUtils::dot(v2-v1,x2-x1)   * (double) 2 * m1 /(m1 + m2) / rLenSq;
+//                n1.velocity = v1p;
+//                n2.velocity = v2p;
+//                n1.position += -2.0 * v1p;
+//                n2.position += -2.0 * v2p;
 
             }
         }

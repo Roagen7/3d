@@ -123,10 +123,18 @@ void Scene::applyLight() {
 //    std::cout << this->camera.yaw << std::endl;
 //    lightDir = VectorUtils::normalize(lightDir);
 
+    //lambert reflection
     for(auto& tri : this->trisGloballyTransformed){
         auto normal = tri.normal();
-        auto lum = VectorUtils::dot(normal, lightDir);
-        tri.lum = std::max(0.1,lum);
+        auto dotNormDir = VectorUtils::dot(normal, lightDir);
+    
+
+        auto r = VectorUtils::normalize(lightDir - 2 * dotNormDir * normal);
+        auto v = VectorUtils::normalize(tri.v[1] - this->camera.pos);
+        auto specAlpha = 5.0;
+
+        tri.lum = std::max(0.1,dotNormDir) * 0.9;
+        tri.lum += std::pow(VectorUtils::dot(r,v), specAlpha);
 //        tri.lum = 1;
     }
 }
