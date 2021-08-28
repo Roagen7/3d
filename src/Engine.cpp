@@ -75,6 +75,8 @@ void Engine::drawTriangles() {
         }
 
         glBegin(GL_TRIANGLES);
+        tri.col += sf::Vector3<double>(this->bgColor.r, this->bgColor.g, this->bgColor.b) * 0.5;
+
         glColor3f(tri.col.x / 255, tri.col.y/255, tri.col.z/255);
 
         if(this->drawMaterials && tri.material != nullptr){

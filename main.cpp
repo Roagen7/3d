@@ -12,10 +12,10 @@
 int main() {
     //initialization of the engine with some basic settings
     auto *engine = new Engine();
-    auto scene = GravityScene();
+    auto scene = SmallScene();
     engine->drawMaterials = true;
-//    engine->bgColor = sf::Color(0x1e2852);
-    engine->bgColor = sf::Color::Black;
+    engine->bgColor = sf::Color(0x1e2852);
+//    engine->bgColor = sf::Color::Green;
 
     while (engine->isRunning()) {
 
