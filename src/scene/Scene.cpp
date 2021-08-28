@@ -156,7 +156,7 @@ void Scene::painterSort() {
     });
 }
 
-void Scene::updateProperties(std::vector<sf::Keyboard::Key> keysPressed, sf::Vector2<double> mouseDelta) {
+void Scene::updateProperties(double timeDelta, std::vector<sf::Keyboard::Key> keysPressed, sf::Vector2<double> mouseDelta) {
 
 }
 

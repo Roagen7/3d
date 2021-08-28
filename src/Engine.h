@@ -11,6 +11,7 @@
 #include "mesh/Triangle.h"
 #include "scene/Scene.h"
 #include "mesh/material/Material.h"
+#include "config/Environment.h"
 
 
 class Engine {
@@ -29,7 +30,7 @@ public:
     sf::Vector2<double> mousePosRelative;
     std::vector<sf::Keyboard::Key> keysPressed;
 
-    Engine();
+    explicit Engine(Environment env = Environment::config());
     void mapEvents();
     void updateMousePos();
     bool isRunning();

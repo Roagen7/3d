@@ -9,7 +9,7 @@ SmallScene::SmallScene() : Scene() {
     this->initObjects();
 }
 
-void SmallScene::updateProperties(std::vector<sf::Keyboard::Key> keysPressed, sf::Vector2<double> mouseDelta) {
+void SmallScene::updateProperties(double timeDelta,std::vector<sf::Keyboard::Key> keysPressed, sf::Vector2<double> mouseDelta) {
     const double LOOKSENS = 0.002;
     const double MOVESPEED = 2;
 

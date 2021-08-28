@@ -42,7 +42,7 @@ GravityScene::GravityScene() : Scene() {
 
 
 
-void GravityScene::updateProperties(std::vector<sf::Keyboard::Key> keysPressed, sf::Vector2<double> mouseDelta) {
+void GravityScene::updateProperties(double timeDelta, std::vector<sf::Keyboard::Key> keysPressed, sf::Vector2<double> mouseDelta) {
     //character movement
 
     const double LOOKSENS = 0.002;

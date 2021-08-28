@@ -9,7 +9,7 @@ TestScene::TestScene() : Scene() {
     this->initObjects();
 }
 
-void TestScene::updateProperties(std::vector<sf::Keyboard::Key> keysPressed, sf::Vector2<double> mouseDelta) {
+void TestScene::updateProperties(double timeDelta,std::vector<sf::Keyboard::Key> keysPressed, sf::Vector2<double> mouseDelta) {
     const double LOOKSENS = 0.002;
     const double MOVESPEED = 2;
 

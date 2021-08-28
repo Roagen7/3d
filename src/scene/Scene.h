@@ -45,7 +45,7 @@ public:
     void buildFrame(Matrix globalTransformMatrix, Matrix projectionMatrix);
     std::vector<Triangle> getBuiltTris();
     //run this every frame to update scene children properties
-    virtual void updateProperties(std::vector<sf::Keyboard::Key> keysPressed, sf::Vector2<double> mouseDelta);
+    virtual void updateProperties(double timeDelta, std::vector<sf::Keyboard::Key> keysPressed, sf::Vector2<double> mouseDelta);
 };
 
 

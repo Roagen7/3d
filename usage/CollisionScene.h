@@ -23,7 +23,7 @@ public:
     CollisionScene();
     void initMaterials();
     void initObjects();
-    void updateProperties(std::vector<sf::Keyboard::Key> keysPressed, sf::Vector2<double> mouseDelta) override;
+    void updateProperties(double timeDelta ,std::vector<sf::Keyboard::Key> keysPressed, sf::Vector2<double> mouseDelta) override;
 
 };
 

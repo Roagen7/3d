@@ -5,7 +5,7 @@
 #include <iostream>
 #include "Engine.h"
 
-Engine::Engine() {
+Engine::Engine(Environment env) {
     sf::ContextSettings settings;
     settings.depthBits = 24;
     settings.stencilBits = 8;
@@ -20,6 +20,9 @@ Engine::Engine() {
     this->mousePrevPosRelative =sf::Vector2<double>(sf::Mouse::getPosition(*window));
     this->mousePosRelative = sf::Vector2<double>(sf::Mouse::getPosition(*window));
     this->window->setMouseCursorVisible(false);
+
+    this->drawMaterials = env.drawMaterials;
+    this->bgColor = env.bgColor;
 }
 
 void Engine::mapEvents() {
