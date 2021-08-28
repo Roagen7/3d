@@ -17,5 +17,6 @@ void Material::getTextureFromFile(std::string filename) {
 Material Material::defaultMaterial() {
     auto mat = Material();
     mat.texture = sf::Texture();
+    mat.specular = 0.0;
     return mat;
 }

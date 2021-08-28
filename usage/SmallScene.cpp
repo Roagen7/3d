@@ -45,8 +45,8 @@ void SmallScene::updateProperties(std::vector<sf::Keyboard::Key> keysPressed, sf
 
 void SmallScene::initMaterials() {
     auto mat = Material();
-    mat.getTextureFromFile("../assets/texture/box.jpg");
-
+    mat.getTextureFromFile("../assets/texture/moon.jpg");
+    mat.specular = 10.0;
 
     this->materials.push_back(mat);
 
@@ -57,11 +57,17 @@ void SmallScene::initObjects() {
     auto cube = Mesh::getUnitCubeTextured();
     auto statue = Mesh::loadFromObj("../assets/mesh/stat.obj",true);
 
-    statue.material = &this->materials[0];
+    statue.material = &this->materials[1];
     cube.material = &this->materials[1];
 
 //    this->pushMesh(cube);
     this->pushMesh(statue);
+
+    auto l = Light({0.0,-1.0,-1.0}, 2.0, {255,255,255});
+//    auto l2 = Light({0,-1,0}, 0.5, {255,255,0});
+    this->lights.push_back(l);
+//    this->lights.push_back(l2);
+
 }
 
 

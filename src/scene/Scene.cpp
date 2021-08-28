@@ -87,7 +87,7 @@ void Scene::globalTransform(Matrix matrix) {
         for(auto tri : this->trisLocallyTransformed){
             tri = tri.transform(matrix);
             auto ray = tri.v[1] - this->camera.pos;
-//
+
             if(VectorUtils::dot(tri.normal(), ray) >= 0.0){
                 continue;
             }
@@ -115,27 +115,35 @@ void Scene::applyLight() {
 
     //TODO: add light sources
     sf::Vector3<double> lightDir(0.0, -1.0, -1.0);
-//    sf::Vector3<double> lightDir = (  Matrix::getRotationMatrixAxisX(camera.pitch)).multiplyByVector({0,0,-1});
-//    lightDir = -camera.lookDir();
 
-//    std::cout << camera.lookDir().x <<  " " <<camera.lookDir().y << " "<<camera.lookDir().z<< std::endl;
-//
-//    std::cout << this->camera.yaw << std::endl;
-//    lightDir = VectorUtils::normalize(lightDir);
 
     //lambert reflection
     for(auto& tri : this->trisGloballyTransformed){
+
+        auto sum = sf::Vector3<double>();
         auto normal = tri.normal();
-        auto dotNormDir = VectorUtils::dot(normal, lightDir);
-    
+        auto vis = VectorUtils::normalize(tri.v[1] - this->camera.lookDir());
+        for(auto light : this->lights){
+            auto lam = VectorUtils::dot(normal, light.getDirection()) * 0.4;
+            auto ref = VectorUtils::normalize(lightDir -  2* lam * normal);
+            auto colV3 = sf::Vector3<double>({(double)light.color.r, (double)light.color.g, (double)light.color.b});
 
-        auto r = VectorUtils::normalize(lightDir - 2 * dotNormDir * normal);
-        auto v = VectorUtils::normalize(tri.v[1] - this->camera.pos);
-        auto specAlpha = 5.0;
+            double spec = 0;
+            if( VectorUtils::dot(ref,vis) >= 0){
+                spec = std::pow(VectorUtils::dot(ref,vis), tri.material->specular) * 0.1;
+            }
 
-        tri.lum = std::max(0.1,dotNormDir) * 0.9;
-        tri.lum += std::pow(VectorUtils::dot(r,v), specAlpha);
-//        tri.lum = 1;
+
+            sum += (lam + spec) * colV3 * light.energy;
+
+        }
+//        std::cout << sum.x << " " << sum.y << " " << sum.z << std::endl;
+        tri.col = sum /(double) this->lights.size();
+//        tri.col.x = std::min(255.0,tri.col.x);
+//        tri.col.y = std::min(255.0,tri.col.y);
+//        tri.col.z = std::min(255.0,tri.col.z);
+
+
     }
 }
 

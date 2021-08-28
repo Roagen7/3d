@@ -118,6 +118,8 @@ void GravityScene::initMaterials() {
 
 void GravityScene::initObjects() {
 
+    this->lights.push_back(Light({0,-1,-1}, 5, {255,255,255}));
+
     auto spaceship = Mesh::loadFromObj("../assets/mesh/sphere.obj", true);
     spaceship.material = &this->materials[3];
     this->pushMesh(spaceship);

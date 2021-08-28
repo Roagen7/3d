@@ -32,4 +32,4 @@
 ![](docs/spy.png)
 ![](docs/earth.png)
 ![](docs/show.gif)
-
+![](docs/statue.png)

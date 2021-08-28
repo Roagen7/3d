@@ -75,7 +75,7 @@ void Engine::drawTriangles() {
         }
 
         glBegin(GL_TRIANGLES);
-        glColor3f(tri.lum, tri.lum, tri.lum);
+        glColor3f(tri.col.x / 255, tri.col.y/255, tri.col.z/255);
 
         if(this->drawMaterials && tri.material != nullptr){
 
@@ -108,6 +108,7 @@ void Engine::emptyTriangles() {
 
 void Engine::fixTriangles() {
     for(auto& tri : triangles){
+
         tri = tri.fixed(this->windowSize);
     }
 }

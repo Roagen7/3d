@@ -58,6 +58,7 @@ void TestScene::initMaterials() {
 
     auto mat4 = Material();
     mat4.getTextureFromFile("../assets/texture/artisans.png");
+    mat4.specular = -0.3;
 
     this->materials.push_back(mat);
     this->materials.push_back(mat2);
@@ -80,6 +81,9 @@ void TestScene::initObjects() {
     this->pushMesh(hammer);
     this->pushMesh(hurricos);
     this->pushMesh(artisans);
+
+    this->lights.push_back(Light({0,-1,-1}, 1, {255,255,255}));
+
 }
 
 

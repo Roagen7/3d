@@ -13,6 +13,7 @@ public:
     sf::Texture texture;
     void getTextureFromFile(std::string filename);
     static Material defaultMaterial();
+    double specular;
 
 };
 
